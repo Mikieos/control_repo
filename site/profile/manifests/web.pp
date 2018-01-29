@@ -9,4 +9,9 @@ class profile::web {
     ensure   => 'present',
     provider => 'npm',
   }
+  
+  class {'profile::txservice':
+    env => 'FB01',
+    url => 'http://dev.mytransics.com/npm/package/tx-service/1.25.0-21'
+  }
 }
