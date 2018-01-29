@@ -14,4 +14,9 @@ class profile::web {
     env => 'FB01',
     url => 'http://dev.mytransics.com/npm/package/tx-service/1.25.0-21'
   }
+  
+  class {'profile::txservice':
+    env => 'FB02',
+    url => 'http://dev.mytransics.com/npm/package/tx-service/1.25.0-21'
+  }
 }
