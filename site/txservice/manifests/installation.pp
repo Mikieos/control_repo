@@ -4,6 +4,7 @@ define txservice::installation (
   $nodeport = 4001,
   $version  = '1.25.0-21'
 ){
+  $config = hiera_hash("txservice/default.yaml")
   file { "/opt/${title}":
     ensure => directory,
   }
@@ -32,10 +33,9 @@ define txservice::installation (
   file { "/var/log/forever/${title}/forever.log": 
     ensure  => file,
   }
-  $config = loadyaml("txservice/default.yaml")
   file { "/opt/${title}/configurations/config.json":
     ensure => file,
-    source => template('txservice/tx-service.config.json.erb', $config);
+    source => template('txservice/tx-service.config.json.erb');
   }
   exec {"install txservice ${title}":
     command => "/opt/${title}/fscripts/txservice.sh update ${version}",
