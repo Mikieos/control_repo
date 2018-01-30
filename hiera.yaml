@@ -1,5 +1,4 @@
-hierarchy:
-  config :
+config :
     domain_name: "mytransics.com"
     cloud_host_name: "qa"
 
