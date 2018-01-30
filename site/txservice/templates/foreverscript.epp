@@ -21,7 +21,7 @@ case "$1" in
         npm install --prefix /opt/<%= $env %> http://dev.mytransics.com/npm/package/tx-service/"$2" -g
         rm -f /opt/<%= $env %>/lib/node_modules/tx-service/config.json
         ln -s /opt/<%= $env %>/configurations/config.json /opt/<%= $env %>/lib/node_modules/tx-service/config.json
-        /opt/<%= $env %>/fscripts/tx-service.sh restart
+        /opt/<%= $env %>/fscripts/txservice.sh restart
         ;;
   *)
         echo "Usage: $0 start|stop|restart|tail|logs|update"
