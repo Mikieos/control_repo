@@ -11,4 +11,6 @@ class txservice (
     ensure   => 'present',
     provider => 'npm',
   }
+  
+  class { 'nginx': }
 }
