@@ -21,6 +21,7 @@ define txservice::installation (
   }
   file { "/opt/${title}/fscripts/txservice.sh":
     ensure  => file,
+    mode    => '755',
     content => epp('txservice/foreverscript', {
       env => $title
     })
@@ -30,7 +31,6 @@ define txservice::installation (
   }
   file { "/var/log/forever/${title}/forever.log": 
     ensure  => file,
-    mode    => '755',
   }
   exec {"install txservice ${title}":
     command => "/opt/${title}/fscripts/txservice.sh update ${version}",
