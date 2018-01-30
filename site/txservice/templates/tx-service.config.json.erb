@@ -1,0 +1,3241 @@
+{
+  "server": {
+    "host": "<%= @config["mytransics"]["domain"] %><% if @config["mytransics"]["service"]["hostPort"] %>:<%= @config["mytransics"]["service"]["hostPort"] %><% end %>",
+    "uri": "<%= @config["mytransics"]["service"]["hostUri"] %>",
+    "port": "<%= @config["mytransics"]["service"]["port"] %>"
+  },
+  "txIdentity": {
+    "host": "<%= @config["mytransics"]["authenticationEndpoint"] %>",
+    "api": "<%= @config["mytransics"]["authenticationUri"] %>",
+    "redirectUrl": "<%= @config["mytransics"]["domain"] %>/id/app/<%= @config["mytransics"]["service"]["authenticationRedirectKey"] %>",
+    "apiKey": "<%= @config["mytransics"]["service"]["authenticationApiKey"] %>",
+    "secret": "<%= @config["mytransics"]["service"]["authenticationApiSecret"] %>"
+  },
+  <% if @config["redis"]["endpoints"] %>
+  "redis": {
+    "endpoints": [
+      <% @config["redis"]["endpoints"].each_with_index  do |value_hash, index| %>
+      {
+        "host": "<%= value_hash["host"] %>",
+        "port": <%= value_hash["port"] %>
+      }<% if index != @config["redis"]["endpoints"].size - 1 %>,<% end %>
+    <% end %>
+    ],
+    "namespace": "<%= @config["mytransics"]["service"]["cachenamespace"] %>",
+    "master": "<%= @config["redis"]["master"] %>",
+    "password": "<%= @config["redis"]["password"] %>",
+    "debug": "<%= @config["redis"]["debug"] %>",
+    "retryDelay": "<%= @config["redis"]["retry_delay"] %>",
+    "retryBackoff": "<%= @config["redis"]["retry_backoff"] %>"
+  },
+  <% else %>
+  "redis": {
+    "namespace": "<%= @config["mytransics"]["service"]["cachenamespace"] %>",
+    "host": "<%= @config["redis"]["host"] %>",
+    "port": "<%= @config["redis"]["port"] %>"
+  },
+  <% end %>
+  "requestHandler": {
+    "endpoints": [
+      <% @config["mytransics"]["service"]["endpoints"].each_with_index  do |value_hash, index| %>
+        {
+          "id": "<%= value_hash["id"] %>",
+          "url": "<%= value_hash["host"] %>",
+          "debug": <%= value_hash["debug"] || false %>
+        }<% if index != @config["mytransics"]["service"]["endpoints"].size - 1 %>,<% end %>
+      <% end %>
+    ]
+  },
+  "application": {
+    "title": "<%= @config["mytransics"]["service"]["title"] %>",
+    "cssFile": "<%= @config["mytransics"]["service"]["cssFile"] %>",
+    <% if @config["mytransics"]["service"]["jsFile"] %>"jsFile": "<%= @config["mytransics"]["service"]["jsFile"] %>",<% end %>
+    <% if @config["mytransics"]["service"]["cdnUrl"] %>"cdnUrl": "<%= @config["mytransics"]["service"]["cdnUrl"] %>",<% end %>
+    <% if @config["mytransics"]["service"]["useMinified"] %>"useMinified": "<%= @config["mytransics"]["service"]["useMinified"] %>",<% end %>
+    "applicationNames": [
+      {
+        "text": "TX-Flex",
+        "value": "TX-Flex"
+      }
+    ],
+    "settings": {
+      "environment": "<%= @config["mytransics"]["service"]["settings"]["environment"] %>",
+      "transicsStockId": <%= @config["mytransics"]["service"]["settings"]["transicsStockId"] %>,
+	  "blockedCloseByDrivingActionGroups": [1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37],
+      "defaultPackageType": "<%= @config["mytransics"]["service"]["settings"]["defaultPackageType"] %>",
+      "defaultAutomaticUpdate": false,
+      "helppage": "<%= @config["mytransics"]["service"]["settings"]["helppage"] %>",
+      "supportSFMS" : <%= @config["mytransics"]["service"]["settings"]["isSFMS"] %>,
+      "tciCodeMonthValidityPeriod": {
+        "transics": 6,
+        "customer": 6,
+        "external": 6
+      },
+      "routefields": [
+        {
+          "fieldName": "routeCorridorRadius",
+          "values": {
+            "value1": {
+              "text": "100 m",
+              "value": "100"
+            },
+            "value2": {
+              "text": "200 m",
+              "value": "200"
+            },
+            "value3": {
+              "text": "300 m",
+              "value": "300"
+            },
+            "value4": {
+              "text": "400 m",
+              "value": "400"
+            },
+            "value5": {
+              "text": "500 m",
+              "value": "500"
+            },
+            "value6": {
+              "text": "600 m",
+              "value": "600"
+            },
+            "value7": {
+              "text": "700 m",
+              "value": "700"
+            },
+            "value8": {
+              "text": "800 m",
+              "value": "800"
+            },
+            "value9": {
+              "text": "900 m",
+              "value": "900"
+            },
+            "value10": {
+              "text": "1000 m",
+              "value": "1000"
+            }
+          }
+        },
+        {
+          "fieldName": "routeViaPointsRadius",
+          "values": {
+            "value1": {
+              "text": "200 m",
+              "value": "200"
+            },
+            "value2": {
+              "text": "400 m",
+              "value": "400"
+            },
+            "value3": {
+              "text": "600 m",
+              "value": "600"
+            },
+            "value4": {
+              "text": "800 m",
+              "value": "800"
+            },
+            "value5": {
+              "text": "1000 m",
+              "value": "1000"
+            },
+            "value6": {
+              "text": "1200 m",
+              "value": "1200"
+            },
+            "value7": {
+              "text": "1400 m",
+              "value": "1400"
+            },
+            "value8": {
+              "text": "1600 m",
+              "value": "1600"
+            },
+            "value9": {
+              "text": "1800 m",
+              "value": "1800"
+            },
+            "value10": {
+              "text": "2000 m",
+              "value": "2000"
+            },
+            "value11": {
+              "text": "2200 m",
+              "value": "2200"
+            },
+            "value12": {
+              "text": "2400 m",
+              "value": "2400"
+            },
+            "value13": {
+              "text": "2600 m",
+              "value": "2600"
+            },
+            "value14": {
+              "text": "2800 m",
+              "value": "2800"
+            },
+            "value15": {
+              "text": "3000 m",
+              "value": "3000"
+            },
+            "value16": {
+              "text": "3200 m",
+              "value": "3200"
+            },
+            "value17": {
+              "text": "3400 m",
+              "value": "3400"
+            },
+            "value18": {
+              "text": "3600 m",
+              "value": "3600"
+            },
+            "value19": {
+              "text": "3800 m",
+              "value": "3800"
+            },
+            "value20": {
+              "text": "4000 m",
+              "value": "4000"
+            },
+            "value21": {
+              "text": "4200 m",
+              "value": "4200"
+            },
+            "value22": {
+              "text": "4400 m",
+              "value": "4400"
+            },
+            "value23": {
+              "text": "4600 m",
+              "value": "4600"
+            },
+            "value24": {
+              "text": "4800 m",
+              "value": "4800"
+            },
+            "value25": {
+              "text": "5000 m",
+              "value": "5000"
+            },
+            "value26": {
+              "text": "5200 m",
+              "value": "5200"
+            },
+            "value27": {
+              "text": "5400 m",
+              "value": "5400"
+            },
+            "value28": {
+              "text": "5600 m",
+              "value": "5600"
+            },
+            "value29": {
+              "text": "5800 m",
+              "value": "5800"
+            },
+            "value30": {
+              "text": "6000 m",
+              "value": "6000"
+            }
+          }
+        }
+      ],
+      "destinationServerUrls": [
+        {
+          "value": "bridge.tx-connect.com",
+          "text": "Production B: bridge.tx-connect.com"
+        },
+        {
+          "value": "bridgepp.tx-connect.com",
+          "text": "Production A: bridgepp.tx-connect.com"
+        },
+        {
+          "value": "bridgeft.tx-connect.com",
+          "text": "FT: bridgeft.tx-connect.com"
+        },
+        {
+          "value": "sky.tx-magellan.com",
+          "text": "QA: sky.tx-magellan.com"
+        },
+        {
+          "value": "skydev.tx-magellan.com",
+          "text": "DEV: skydev.tx-magellan.com"
+        }
+      ],
+      "destinationServerPorts": [
+        {
+          "value": "5151",
+          "text": "Prod B / Prod A / Dev: 5151"
+        },
+        {
+          "value": "5131",
+          "text": "FT: 5131"
+        },
+        {
+          "value": "5150",
+          "text": "QA: 5150"
+        }
+      ],
+      "txconnecturls": [
+        {
+          "urlName": "reportingClientUrl",
+          "urls": {
+            "url1": {
+              "text": "Production B: http://www.tx-connect.com",
+              "value": "http://www.tx-connect.com"
+            },
+            "url2": {
+              "text": "Production A: https://ww3.tx-connect.com",
+              "value": "https://ww3.tx-connect.com"
+            },
+            "url3": {
+              "text": "FT: http://FT.tx-connect.com/",
+              "value": "http://FT.tx-connect.com/"
+            },
+            "url4": {
+              "text": "QA: http://172.16.0.210/TxReports/tx-reports.application",
+              "value": "http://172.16.0.210/TxReports/tx-reports.application"
+            }
+          }
+        },
+        {
+          "urlName": "reportsUrl",
+          "urls": {
+            "url1": {
+              "text": "Production B: https://Reports.tx-connect.com/ReportServer",
+              "value": "https://reports.tx-connect.omc/ReportServer"
+            },
+            "url2": {
+              "text": "Production A: https://ReportsPP.tx-connect.com/Reportserver_PP",
+              "value": "https://ReportsPP.tx-connect.com/Reportserver_PP"
+            },
+            "url3": {
+              "text": "FT: https://ReportsFT.tx-connect.com/Reportserver_FT",
+              "value": "https://ReportsFT.tx-connect.com/Reportserver_FT"
+            },
+            "url4": {
+              "text": "QA: http://RND-WIN7_04:80/ReportServerSkyQa",
+              "value": "http://RND-WIN7_04:80/ReportServerSkyQa"
+            }
+          }
+        },
+        {
+          "urlName": "fleetWebserviceUrl",
+          "urls": {
+            "url1": {
+              "text": "Production B: http://www.tx-connect.com/FWS/Fleetservice.svc",
+              "value": "http://www.tx-connect.com/FWS/Fleetservice.svc"
+            },
+            "url2": {
+              "text": "Production B SSL: https://www.tx-connect.com/FWS/Fleetservice.svc",
+              "value": "https://www.tx-connect.com/FWS/Fleetservice.svc"
+            },
+            "url3": {
+              "text": "Production A: https://ww3.tx-connect.com/FWS/Fleetservice.svc",
+              "value": "https://ww3.tx-connect.com/FWS/Fleetservice.svc"
+            },
+            "url4": {
+              "text": "FT: http://FT.tx-connect.com/FWS/Fleetservice.svc",
+              "value": "http://FT.tx-connect.com/FWS/Fleetservice.svc"
+            },
+            "url5": {
+              "text": "QA: http://172.16.0.210/FWS/FleetService.svc",
+              "value": "http://172.16.0.210/FWS/FleetService.svc"
+            },
+            "url6": {
+              "text": "DEMO_MIX: https://demo.tx-connect.com/mix/FWS/FleetServiceMixed.svc",
+              "value": "https://demo.tx-connect.com/mix/FWS/FleetServiceMixed.svc"
+            },
+	        "url7": {
+               "text": "FLEETFT_MIX: https://fleetFT.tx-connect.com/FWSMIX/FleetServiceMixed.svc",
+               "value": "https://fleetFT.tx-connect.com/FWSMIX/FleetServiceMixed.svc"
+             },
+	        "url8": {
+               "text": "PROD_MIX_SUNGARDFLEET: https://fleet.tx-connect.com/FWSMIX/FleetServiceMixed.svc",
+               "value": "https://fleet.tx-connect.com/FWSMIX/FleetServiceMixed.svc"
+             },
+             "url9": {
+               "text": "PROD_A_MIX_SUNGARDFLEET: https://fleet3.tx-connect.com/FWSMIX/FleetServiceMixed.svc",
+               "value": "https://fleet3.tx-connect.com/FWSMIX/FleetServiceMixed.svc"
+             }
+          }
+        },
+        {
+          "urlName": "socialWebserviceUrl",
+          "urls": {
+            "url1": {
+              "text": "Production B: http://www.tx-connect.com/SWS/Socialservice.svc",
+              "value": "http://www.tx-connect.com/SWS/Socialservice.svc"
+            },
+            "url2": {
+              "text": "Production B SSL: https://www.tx-connect.com/SWS/Socialservice.svc",
+              "value": "https://www.tx-connect.com/SWS/Socialservice.svc"
+            },
+            "url3": {
+              "text": "Production A: https://ww3.tx-connect.com/SWS/Socialservice.svc",
+              "value": "https://ww3.tx-connect.com/SWS/Socialservice.svc"
+            },
+            "url4": {
+              "text": "FT: http://FT.tx-connect.com/SWS/Socialservice.svc",
+              "value": "http://FT.tx-connect.com/SWS/Socialservice.svc"
+            },
+            "url5": {
+              "text": "QA: http://172.16.0.210/SWS/SocialService.svc",
+              "value": "http://172.16.0.210/SWS/SocialService.svc"
+            },
+            "url6": {
+              "text": "DEMO_MIX: https://demo.tx-connect.com/mix/SWS_TXC/SocialServiceMixed.svc",
+              "value": "https://demo.tx-connect.com/mix/SWS_TXC/SocialServiceMixed.svc"
+            },
+            "url7": {
+              "text": "FLEETFT_MIX: https://fleetFT.tx-connect.com/SWSMIX/SocialServiceMixed.svc",
+              "value": "https://fleetFT.tx-connect.com/SWSMIX/SocialServiceMixed.svc"
+            },
+            "url8": {
+              "text": "PROD_MIX_SUNGARDFLEET: https://fleet.tx-connect.com/SWSMIX/SocialServiceMixed.svc",
+              "value": "https://fleet.tx-connect.com/SWSMIX/SocialServiceMixed.svc"
+            },
+            "url9": {
+              "text": "PROD_A_MIX_SUNGARDFLEET: https://fleet3.tx-connect.com/SWSMIX/SocialServiceMixed.svc",
+              "value": "https://fleet3.tx-connect.com/SWSMIX/SocialServiceMixed.svc"
+            }
+          }
+        },
+        {
+          "urlName": "centralWebserviceUrl",
+          "urls": {
+            "url1": {
+              "text": "Production B: http://www.tx-connect.com/CWS/CentralService.svc",
+              "value": "http://www.tx-connect.com/CWS/CentralService.svc"
+            },
+            "url2": {
+              "text": "Production B SSL: https://www.tx-connect.com/CWS/CentralService.svc",
+              "value": "https://www.tx-connect.com/CWS/CentralService.svc"
+            },
+            "url3": {
+              "text": "Production A: https://ww3.tx-connect.com/CWS/CentralService.svc",
+              "value": "https://ww3.tx-connect.com/CWS/CentralService.svc"
+            },
+            "url4": {
+              "text": "FT: http://FT.tx-connect.com/CWS/CentralService.svc",
+              "value": "http://FT.tx-connect.com/CWS/CentralService.svc"
+            },
+            "url5": {
+              "text": "QA: http://172.16.0.210/CWS/CentralService.svc",
+              "value": "http://172.16.0.210/CWS/CentralService.svc"
+            }
+          }
+        },
+        {
+          "urlName": "reportsWebserviceUrl",
+          "urls": {
+            "url1": {
+              "text": "Production B: http://www.tx-connect.com/IRWS/Reports.svc/soap",
+              "value": "http://www.tx-connect.com/IRWS/Reports.svc/soap"
+            },
+            "url2": {
+              "text": "Production B SSL: https://www.tx-connect.com/IRWS/Reports.svc/soap",
+              "value": "https://www.tx-connect.com/IRWS/Reports.svc/soap"
+            },
+            "url3": {
+              "text": "Production A: https://ww3.tx-connect.com/IRWS/Reports.svc/soap",
+              "value": "https://ww3.tx-connect.com/IRWS/Reports.svc/soap"
+            },
+            "url4": {
+              "text": "FT: http://ft.tx-connect.com/IRWS/Reports.svc/soap",
+              "value": "http://ft.tx-connect.com/IRWS/Reports.svc/soap"
+            },
+            "url5": {
+              "text": "QA: http://172.16.0.210/IRWS/Reports.svc/soap",
+              "value": "http://172.16.0.210/IRWS/Reports.svc/soap"
+            },
+            "url6": {
+              "text": "DEMO_MIX: https://demo.tx-connect.com/mix/IRWS/reports.svc",
+              "value": "https://demo.tx-connect.com/mix/IRWS/reports.svc"
+            },
+            "url7": {
+              "text": "FLEETFT_MIX: https://fleetFT.tx-connect.com/IRWSMIX/reports.svc/soap",
+              "value": "https://fleetFT.tx-connect.com/IRWSMIX/reports.svc/soap"
+            },
+            "url8": {
+              "text": "PROD_MIX_SUNGARDFLEET: https://fleet.tx-connect.com/IRWSMIX/reports.svc/soap",
+              "value": "https://fleet.tx-connect.com/IRWSMIX/reports.svc/soap"
+            },
+            "url9": {
+              "text": "PROD_A_MIX_SUNGARDFLEET: https://fleet3.tx-connect.com/IRWSMIX/reports.svc/soap",
+              "value": "https://fleet3.tx-connect.com/IRWSMIX/reports.svc/soap"
+            }
+          }
+        },
+        {
+          "urlName": "urlTxVisioSws",
+          "urls": {
+            "url1": {
+              "text": "Production B: http://www.tx-connect.com/SWS_TXS/Socialservice.svc",
+              "value": "http://www.tx-connect.com/SWS_TXS/Socialservice.svc"
+            },
+            "url2": {
+              "text": "Production B SSL: https://www.tx-connect.com/SWS_TXS/Socialservice.svc",
+              "value": "https://www.tx-connect.com/SWS_TXS/Socialservice.svc"
+            },
+            "url3": {
+              "text": "Production A: https://ww3.tx-connect.com/SWS_TXS/Socialservice.svc",
+              "value": "https://ww3.tx-connect.com/SWS_TXS/Socialservice.svc"
+            },
+            "url4": {
+              "text": "FT: http://FT.tx-connect.com/SWS_TXS/Socialservice.svc",
+              "value": "http://FT.tx-connect.com/SWS_TXS/Socialservice.svc"
+            },
+            "url5": {
+              "text": "QA: http://skyqa.transics.com/TXSocialSWS/SocialService.svc",
+              "value": "http://skyqa.transics.com/TXSocialSWS/SocialService.svc"
+            },
+            "url6": {
+              "text": "DEV: http://skydev.transics.com/TXSocialSWS/SocialService.svc",
+              "value": "http://skydev.transics.com/TXSocialSWS/SocialService.svc"
+            },
+            "url7": {
+              "text": "DEMO_MIX: https://demo.tx-connect.com/mix/SWS_TXC/SocialServiceMixed.svc",
+              "value": "https://demo.tx-connect.com/mix/SWS_TXC/SocialServiceMixed.svc"
+            },
+            "url8": {
+              "text": "FLEETFT_MIX: https://fleetFT.tx-connect.com/SWSMIX/SocialServiceMixed.svc",
+              "value": "https://fleetFT.tx-connect.com/SWSMIX/SocialServiceMixed.svc"
+            },
+            "url9": {
+              "text": "PROD_MIX_SUNGARDFLEET: https://fleet.tx-connect.com/SWSMIX/SocialServiceMixed.svc",
+              "value": "https://fleet.tx-connect.com/SWSMIX/SocialServiceMixed.svc"
+            },
+            "url10": {
+              "text": "PROD_A_MIX_SUNGARDFLEET: https://fleet3.tx-connect.com/SWSMIX/SocialServiceMixed.svc",
+              "value": "https://fleet3.tx-connect.com/SWSMIX/SocialServiceMixed.svc"
+            }
+          }
+        }
+      ],
+      "txsocialbackofficevalues": [
+        {
+          "propertyName": "socialModeDropdown",
+          "options": {
+            "option1": {
+              "label": "TX-Social Start",
+              "value": "START"
+            },
+            "option2": {
+              "label": "TX-Social Pro",
+              "value": "PRO"
+            },
+            "option3": {
+              "label": "TX-Social Expert",
+              "value": "EXPERT"
+            },
+            "option4": {
+              "label": "TX-Social STARTMS",
+              "value": "X37YwUM100400G000u"
+            },
+            "option5": {
+              "label": "TX-Social Belgium",
+              "value": "X3%%%%%FFr70003E0f"
+            },
+            "option6": {
+              "label": "TX-Social Belgium and France with Export Sage",
+              "value": "X3%%%%%FFr700o7E0%"
+            },
+            "option7": {
+              "label": "TX-Social Belgium and France without Export Sage ",
+              "value": "X3%%%%%FFr700o3E05 "
+            }
+          }
+        }
+      ],
+      "ulsprofiles": [
+        {
+          "profileName": "Always",
+          "addLogOutputDebug": false,
+          "immediateSend": true,
+          "logActive": true,
+          "logLevel": 0,
+          "maxSizeBeforeCompress": 300
+        },
+        {
+          "profileName": "Critical",
+          "addLogOutputDebug": false,
+          "immediateSend": true,
+          "logActive": true,
+          "logLevel": 1,
+          "maxSizeBeforeCompress": 300
+        },
+        {
+          "profileName": "Critical and Send immediate",
+          "addLogOutputDebug": false,
+          "immediateSend": true,
+          "logActive": true,
+          "logLevel": 2,
+          "maxSizeBeforeCompress": 300
+        },
+        {
+          "profileName": "Normal",
+          "addLogOutputDebug": false,
+          "immediateSend": true,
+          "logActive": true,
+          "logLevel": 8,
+          "maxSizeBeforeCompress": 300
+        },
+        {
+          "profileName": "Increased",
+          "addLogOutputDebug": false,
+          "immediateSend": true,
+          "logActive": true,
+          "logLevel": 12,
+          "maxSizeBeforeCompress": 300
+        },
+        {
+          "profileName": "Maximum",
+          "addLogOutputDebug": false,
+          "immediateSend": true,
+          "logActive": true,
+          "logLevel": 15,
+          "maxSizeBeforeCompress": 300
+        },
+        {
+          "profileName": "Outputdebug",
+          "addLogOutputDebug": true,
+          "immediateSend": true,
+          "logActive": true,
+          "logLevel": 15,
+          "maxSizeBeforeCompress": 300
+        }
+      ],
+      "messageViewerGroup": [
+        {
+          "Name": "Activity",
+          "Value": "Activity"
+        },
+        {
+          "Name": "Alarm",
+          "Value": "Alarm"
+        },
+        {
+          "Name": "Allowance",
+          "Value": "Allowance"
+        },
+        {
+          "Name": "Config",
+          "Value": "Config"
+        },
+        {
+          "Name": "Diagnostic",
+          "Value": "Diagnostic"
+        },
+        {
+          "Name": "DIR",
+          "Value": "DIR"
+        },
+        {
+          "Name": "Doc",
+          "Value": "Doc"
+        },
+        {
+          "Name": "ECO",
+          "Value": "ECO"
+        },
+        {
+          "Name": "ECO assistant",
+          "Value": "ECO assistant"
+        },
+        {
+          "Name": "ETA",
+          "Value": "ETA"
+        },
+        {
+          "Name": "IS",
+          "Value": "IS"
+        },
+        {
+          "Name": "Log",
+          "Value": "Log"
+        },
+        {
+          "Name": "Login-Logout",
+          "Value": "Login-Logout"
+        },
+        {
+          "Name": "OTA ERROR",
+          "Value": "OTA ERROR"
+        },
+        {
+          "Name": "Package",
+          "Value": "Package"
+        },
+        {
+          "Name": "Package update",
+          "Value": "Package update"
+        },
+        {
+          "Name": "Planning",
+          "Value": "Planning"
+        },
+        {
+          "Name": "RDD",
+          "Value": "RDD"
+        },
+        {
+          "Name": "Reset",
+          "Value": "Reset"
+        },
+        {
+          "Name": "Route",
+          "Value": "Route"
+        },
+        {
+          "Name": "Sensor",
+          "Value": "Sensor"
+        },
+        {
+          "Name": "Sensor Config",
+          "Value": "Sensor Config"
+        },
+        {
+          "Name": "Servicetimes",
+          "Value": "Servicetimes"
+        },
+        {
+          "Name": "Status info",
+          "Value": "Status info"
+        },
+        {
+          "Name": "Tacho",
+          "Value": "Tacho"
+        },
+        {
+          "Name": "Text message",
+          "Value": "Text message"
+        },
+        {
+          "Name": "Trailer",
+          "Value": "Trailer"
+        }
+      ],
+      "messagesByGroup": [
+        {
+          "Id": "34",
+          "Message": "action_selection",
+          "Name": "Activity"
+        },
+        {
+          "Id": 38,
+          "Message": "activity_entry_feedback",
+          "Name": "Activity"
+        },
+        {
+          "Id": "105",
+          "Message": "continue_message",
+          "Name": "Login-Logout"
+        },
+        {
+          "Id": "106",
+          "Message": "question_path_closed",
+          "Name": "Activity"
+        },
+        {
+          "Id": "114",
+          "Message": "alarm_message",
+          "Name": "Alarm"
+        },
+        {
+          "Id": "95",
+          "Message": "allowance_definition_request",
+          "Name": "Allowance"
+        },
+        {
+          "Id": "96",
+          "Message": "allowance_definition_received",
+          "Name": "Allowance"
+        },
+        {
+          "Id": "97",
+          "Message": "allowance_definition_argument",
+          "Name": "Allowance"
+        },
+        {
+          "Id": "98",
+          "Message": "allowance_synchro_request",
+          "Name": "Allowance"
+        },
+        {
+          "Id": "99",
+          "Message": "allowance_synchro_argument",
+          "Name": "Allowance"
+        },
+        {
+          "Id": "100",
+          "Message": "allowance_change_feedback",
+          "Name": "Allowance"
+        },
+        {
+          "Id": "101",
+          "Message": "allowance_changed_argument",
+          "Name": "Allowance"
+        },
+        {
+          "Id": "19",
+          "Message": "configuraton_request_to_device",
+          "Name": "Config"
+        },
+        {
+          "Id": "20",
+          "Message": "configuraton_request_from_device",
+          "Name": "Config"
+        },
+        {
+          "Id": "22",
+          "Message": "configuration_changed",
+          "Name": "Config"
+        },
+        {
+          "Id": "23",
+          "Message": "set_configuration",
+          "Name": "Config"
+        },
+        {
+          "Id": "41",
+          "Message": "reply_config_set_not_available",
+          "Name": "Config"
+        },
+        {
+          "Id": "87",
+          "Message": "diagnostic_mode_argument",
+          "Name": "Diagnostic"
+        },
+        {
+          "Id": "88",
+          "Message": "diagnostic_info_message",
+          "Name": "Diagnostic"
+        },
+        {
+          "Id": "102",
+          "Message": "document_scan",
+          "Name": "Doc"
+        },
+        {
+          "Id": "109",
+          "Message": "obc_file_message",
+          "Name": "Doc"
+        },
+        {
+          "Id": "50",
+          "Message": "reset_permanent_monitoring_data",
+          "Name": "ECO"
+        },
+        {
+          "Id": "51",
+          "Message": "send_eco_status_message",
+          "Name": "ECO"
+        },
+        {
+          "Id": "52",
+          "Message": "ribas_synchronize_request",
+          "Name": "ECO assistant"
+        },
+        {
+          "Id": "53",
+          "Message": "ribas_synchronize_response",
+          "Name": "ECO assistant"
+        },
+        {
+          "Id": "103",
+          "Message": "eta_message",
+          "Name": "ETA"
+        },
+        {
+          "Id": "39",
+          "Message": "is_remote_update",
+          "Name": "IS"
+        },
+        {
+          "Id": "40",
+          "Message": "is_reply_message",
+          "Name": "IS"
+        },
+        {
+          "Id": "84",
+          "Message": "is_request",
+          "Name": "IS"
+        },
+        {
+          "Id": "2",
+          "Message": "uls_request",
+          "Name": "Log"
+        },
+        {
+          "Id": "3",
+          "Message": "uls_log",
+          "Name": "Log"
+        },
+        {
+          "Id": "18",
+          "Message": "uls_log_after_request",
+          "Name": "Log"
+        },
+        {
+          "Id": "4",
+          "Message": "log_in",
+          "Name": "Login-Logout"
+        },
+        {
+          "Id": "14",
+          "Message": "forced_log_out",
+          "Name": "Login-Logout"
+        },
+        {
+          "Id": "15",
+          "Message": "login_verification",
+          "Name": "Login-Logout"
+        },
+        {
+          "Id": "35",
+          "Message": "log_out",
+          "Name": "Login-Logout"
+        },
+        {
+          "Id": "36",
+          "Message": "log_switch",
+          "Name": "Login-Logout"
+        },
+        {
+          "Id": "37",
+          "Message": "log_in_and_switch",
+          "Name": "Login-Logout"
+        },
+        {
+          "Id": "70",
+          "Message": "ota_error",
+          "Name": "OTA ERROR"
+        },
+        {
+          "Id": "7",
+          "Message": "packet_version_info_request",
+          "Name": "Package"
+        },
+        {
+          "Id": "8",
+          "Message": "packet_version_info_response",
+          "Name": "Package"
+        },
+        {
+          "Id": "9",
+          "Message": "remote_update_package_definition",
+          "Name": "Package update"
+        },
+        {
+          "Id": "10",
+          "Message": "remote_update_component_request",
+          "Name": "Package update"
+        },
+        {
+          "Id": "11",
+          "Message": "abort_remote_update_request",
+          "Name": "Package update"
+        },
+        {
+          "Id": "17",
+          "Message": "remote_update_push_component_slice",
+          "Name": "Package update"
+        },
+        {
+          "Id": "42",
+          "Message": "send_planning",
+          "Name": "Planning"
+        },
+        {
+          "Id": "43",
+          "Message": "planning_synchronize",
+          "Name": "Planning"
+        },
+        {
+          "Id": "44",
+          "Message": "planning_by_driver",
+          "Name": "Planning"
+        },
+        {
+          "Id": "45",
+          "Message": "planning_by_driver_reply",
+          "Name": "Planning"
+        },
+        {
+          "Id": "46",
+          "Message": "planning_feedback",
+          "Name": "Planning"
+        },
+        {
+          "Id": "47",
+          "Message": "send_planning_reply",
+          "Name": "Planning"
+        },
+        {
+          "Id": "48",
+          "Message": "planning_status_feed_back_synchronization",
+          "Name": "Planning"
+        },
+        {
+          "Id": "115",
+          "Message": "plannning_status_feedback_response",
+          "Name": "Planning"
+        },
+        {
+          "Id": "54",
+          "Message": "rdd_request_download",
+          "Name": "RDD"
+        },
+        {
+          "Id": "55",
+          "Message": "rdd_cancel_current_session",
+          "Name": "RDD"
+        },
+        {
+          "Id": "56",
+          "Message": "rdd_request_for_company_card",
+          "Name": "RDD"
+        },
+        {
+          "Id": "57",
+          "Message": "rdd_data",
+          "Name": "RDD"
+        },
+        {
+          "Id": "64",
+          "Message": "rdd_error_message_in",
+          "Name": "RDD"
+        },
+        {
+          "Id": "65",
+          "Message": "rdd_error_message_out",
+          "Name": "RDD"
+        },
+        {
+          "Id": "66",
+          "Message": "rdd_generic_request",
+          "Name": "RDD"
+        },
+        {
+          "Id": "67",
+          "Message": "rdd_generic_answer_out",
+          "Name": "RDD"
+        },
+        {
+          "Id": "68",
+          "Message": "rdd_succesful_authentication",
+          "Name": "RDD"
+        },
+        {
+          "Id": "69",
+          "Message": "rdd_session_successful",
+          "Name": "RDD"
+        },
+        {
+          "Id": "16",
+          "Message": "reset",
+          "Name": "Reset"
+        },
+        {
+          "Id": "71",
+          "Message": "send_route",
+          "Name": "Route"
+        },
+        {
+          "Id": "72",
+          "Message": "route_transfer_reply_message",
+          "Name": "Route"
+        },
+        {
+          "Id": "73",
+          "Message": "route_change_status_message",
+          "Name": "Route"
+        },
+        {
+          "Id": "74",
+          "Message": "route_request_message",
+          "Name": "Route"
+        },
+        {
+          "Id": "75",
+          "Message": "route_synchronize_request_message",
+          "Name": "Route"
+        },
+        {
+          "Id": "76",
+          "Message": "route_event_message",
+          "Name": "Route"
+        },
+        {
+          "Id": "77",
+          "Message": "route_changes_status_response",
+          "Name": "Route"
+        },
+        {
+          "Id": "33",
+          "Message": "push_service_times_to_device",
+          "Name": "Servicetimes"
+        },
+        {
+          "Id": "104",
+          "Message": "service_times_request_message",
+          "Name": "Servicetimes"
+        },
+        {
+          "Id": "1",
+          "Message": "status_response",
+          "Name": "Status info"
+        },
+        {
+          "Id": "5",
+          "Message": "status_request",
+          "Name": "Status info"
+        },
+        {
+          "Id": "12",
+          "Message": "status_remote_update",
+          "Name": "Status info"
+        },
+        {
+          "Id": "13",
+          "Message": "status_response_after_request",
+          "Name": "Status info"
+        },
+        {
+          "Id": "49",
+          "Message": "reply_on_status_synchronization",
+          "Name": "Status info"
+        },
+        {
+          "Id": "21",
+          "Message": "tacho_state",
+          "Name": "Tacho"
+        },
+        {
+          "Id": "89",
+          "Message": "analog_tacho",
+          "Name": "Tacho"
+        },
+        {
+          "Id": "6",
+          "Message": "text_message",
+          "Name": "Text message"
+        },
+        {
+          "Id": "25",
+          "Message": "text_message_device_request_attachment",
+          "Name": "Text message"
+        },
+        {
+          "Id": "26",
+          "Message": "text_message_device_synchronize",
+          "Name": "Text message"
+        },
+        {
+          "Id": "27",
+          "Message": "text_message_server_to_device_text_message",
+          "Name": "Text message"
+        },
+        {
+          "Id": "28",
+          "Message": "text_message_server_response_synchronize",
+          "Name": "Text message"
+        },
+        {
+          "Id": "29",
+          "Message": "text_message_server_response_attachement",
+          "Name": "Text message"
+        },
+        {
+          "Id": "30",
+          "Message": "text_message_device_report_status",
+          "Name": "Text message"
+        },
+        {
+          "Id": "31",
+          "Message": "text_message_server_report_status",
+          "Name": "Text message"
+        },
+        {
+          "Id": "32",
+          "Message": "text_message_server_response_text_message",
+          "Name": "Text message"
+        },
+        {
+          "Id": "85",
+          "Message": "trailer_coupling",
+          "Name": "Trailer"
+        },
+        {
+          "Id": "86",
+          "Message": "trailer_uncoupling",
+          "Name": "Trailer"
+        },
+        {
+          "Id": "110",
+          "Message": "trailer_info_request",
+          "Name": "Trailer"
+        },
+        {
+          "Id": "111",
+          "Message": "trailer_info_response",
+          "Name": "Trailer"
+        },
+        {
+          "Id": "112",
+          "Message": "trailer_force_decoupling",
+          "Name": "Trailer"
+        },
+        {
+          "Id": "113",
+          "Message": "trailer_detect",
+          "Name": "Trailer"
+        },
+        {
+          "Id": "107",
+          "Message": "request_directory_structure",
+          "Name": "DIR"
+        },
+        {
+          "Id": "108",
+          "Message": "dir_overview_repsonse",
+          "Name": "DIR"
+        },
+        {
+          "Id": "122",
+          "Message": "get_alarm_request",
+          "Name": "Alarm"
+        },
+        {
+          "Id": "123",
+          "Message": "alarm_data_feedback",
+          "Name": "Alarm"
+        },
+        {
+          "Id": "116",
+          "Message": "sensor_trigger",
+          "Name": "Sensor"
+        },
+        {
+          "Id": "117",
+          "Message": "set_sensor_configuration_by_server",
+          "Name": "Sensor Config"
+        },
+        {
+          "Id": "118",
+          "Message": "request_sensor_configuration_by_server",
+          "Name": "Sensor Config"
+        },
+        {
+          "Id": "119",
+          "Message": "sensor_configuration_not_available_by_server",
+          "Name": "Sensor"
+        },
+        {
+          "Id": "120",
+          "Message": "request_sensor_configuration_by_sky_app",
+          "Name": "Sensor Config"
+        },
+        {
+          "Id": "121",
+          "Message": "sensor_configuration_changed_by_sky_app",
+          "Name": "Sensor Config"
+        }
+      ],
+      "txDashboardLanguageList": [
+        {
+          "Name": "English",
+          "Value": "EN"
+        },
+        {
+          "Name": "Czech",
+          "Value": "CZ"
+        },
+        {
+          "Name": "Danish",
+          "Value": "DK"
+        },
+        {
+          "Name": "German",
+          "Value": "DE"
+        },
+        {
+          "Name": "Spanish",
+          "Value": "ES"
+        },
+        {
+          "Name": "French",
+          "Value": "FR"
+        },
+        {
+          "Name": "Italian",
+          "Value": "IT"
+        },
+        {
+          "Name": "Dutch",
+          "Value": "NL"
+        },
+        {
+          "Name": "Norwegian",
+          "Value": "NO"
+        },
+        {
+          "Name": "Polish",
+          "Value": "PL"
+        },
+        {
+          "Name": "Romanian",
+          "Value": "RO"
+        },
+        {
+          "Name": "Russian",
+          "Value": "RU"
+        },
+        {
+          "Name": "Slovakian",
+          "Value": "SK"
+        },
+        {
+          "Name": "Swedish",
+          "Value": "SE"
+        },
+        {
+          "Name": "Turkish",
+          "Value": "TR"
+        }
+      ],
+      "flexRemoteUpdateTypes": [
+        {
+          "text": "Minimum software version via Wifi and GPRS",
+          "value": 0
+        },
+        {
+          "text": "Exact software version via Wifi and GPRS",
+          "value": 1
+        },
+        {
+          "text": "Minimum software version via Wifi only",
+          "value": 2
+        },
+        {
+          "text": "Exact software version via Wifi only",
+          "value": 3
+        }
+      ],
+      "applicationNames": [
+        {
+          "text": "TX-Flex",
+          "value": "TX-Flex"
+        }
+      ],
+      "specialSkyAppFiles":[
+		    {
+			"text" : "Alarms - Digests",
+			"value" : "$alarms_path$/Digests.txt",
+			"isName" : false
+			},
+			{
+			"text" : "Alarms - Alarms (dynamic)",
+			"value" : "$alarms_path$/",
+			"isName" : true
+			},
+			{
+			"text" : "Allowances - Database",
+			"value" : "$persist_path$/Allowances/Allowance.db.sqlite",
+			"isName" : false
+			},
+			{
+			"text" : "Allowances - Definition",
+			"value" : "$persist_path$/Allowances/Allowance.xml",
+			"isName" : false
+			},
+			{
+			"text" : "APP - APN list",
+			"value" : "$persist_path$/APN.lst",
+			"isName" : false
+			},
+			{
+			"text" : "APP - Sensor settings ini",
+			"value" : "$persist_path$/SensorSettings.ini",
+			"isName" : false
+			},
+			{
+			"text" : "APP - Sky ini",
+			"value" : "$persist_path$/Sky.ini",
+			"isName" : false
+			},
+			{
+			"text" : "APP - Sky frequently updated",
+			"value" : "$persist_path$/SkyFrequentlyUpdated.store",
+			"isName" : false
+			},
+			{
+			"text" : "APP - Sky not frequently updated",
+			"value" : "$persist_path$/SkyNotFrequentlyUpdated.store",
+			"isName" : false
+			},
+			{
+			"text" : "Docscan - Docscan (dynamic)",
+			"value" : "$persist_path$/Docscan/",
+			"isName" : true
+			},
+			{
+			"text" : "Flex - CurrentSession",
+			"value" : "$persist_path$/TxFlex/CurrentSession.sky",
+			"isName" : false
+			},
+			{
+			"text" : "IS - Database",
+			"value" : "$persist_path$/IS/IS.db.sqlite",
+			"isName" : false
+			},
+			{
+			"text" : "IS - Definition",
+			"value" : "$persist_path$/IS/IS.xml",
+			"isName" : false
+			},
+			{
+			"text" : "IS - New definition",
+			"value" : "$persist_path$/IS/NewIS.xml",
+			"isName" : false
+			},
+			{
+			"text" : "IS - Variable list (dynamic)",
+			"value" : "$vli_path$/",
+			"isName" : true
+			},
+			{
+			"text" : "Messaging - Database",
+			"value" : "$persist_path$/Messaging/TxtMessages.db.sqlite",
+			"isName" : false
+			},
+			{
+			"text" : "Navigation - Navigation (dynamic)",
+			"value" : "$storage_card_1$/Nav_Disk/",
+			"isName" : true
+			},
+			{
+			"text" : "Navigation - License file",
+			"value" : "$storage_card_1$/Nav_Disk/BNDNav.lic",
+			"isName" : false
+			},
+			{
+			"text" : "Navigation - Recent addresses",
+			"value" : "$storage_card_1$/Nav_Disk/LastAddr",
+			"isName" : false
+			},
+			{
+			"text" : "Navigation - Version file",
+			"value" : "$storage_card_1$/Nav_Disk/version.dat",
+			"isName" : false
+			},
+			{
+			"text" : "OTA - Database",
+			"value" : "$persist_path$/OtaStorage/OtaStorage.db.sqlite",
+			"isName" : false
+			},
+			{
+			"text" : "Package - Remoet update status",
+			"value" : "$application_path$/RUStatus.dat",
+			"isName" : false
+			},
+			{
+			"text" : "Package - Package (dynamic)",
+			"value" : "$application_path$/",
+			"isName" : true
+			},
+			{
+			"text" : "Planning - Database",
+			"value" : "$persist_path$/Planning/Planning.db.sqlite",
+			"isName" : false
+			},
+			{
+			"text" : "Recovery - Calibration 467",
+			"value" : "$persist_path$/Recovery/DocketPort467/Calibration.dat",
+			"isName" : false
+			},
+			{
+			"text" : "Recovery - Calibration 468",
+			"value" : "$persist_path$/Recovery/DocketPort468/Calibration.dat",
+			"isName" : false
+			},
+			{
+			"text" : "Recovery - Last logged in user",
+			"value" : "$persist_path$/Recovery/LastLoggedInUser.dat",
+			"isName" : false
+			},
+			{
+			"text" : "Routes - Database",
+			"value" : "$persist_path$/Routes/Routes.db.sqlite",
+			"isName" : false
+			},
+			{
+			"text" : "ServiceTimes - Database",
+			"value" : "$persist_path$/RTB/ProcessedTacho.db.sqlite",
+			"isName" : false
+			},
+			{
+			"text" : "ServiceTimes - Unprocessed tacho state codriver",
+			"value" : "$persist_path$/RTB/Uptdatacodriver.upt",
+			"isName" : false
+			},
+			{
+			"text" : "Servicetimes - Unprocessed tacho state driver",
+			"value" : "$persist_path$/RTB/Uptdatadriver.upt",
+			"isName" : false
+			},
+			{
+			"text" : "Storage - Storage (dynamic)",
+			"value" : "$debug_path$/",
+			"isName" : true
+			},
+			{
+			"text" : "Trailers - Database",
+			"value" : "$persist_path$/Trailers/Trailers.db.sqlite",
+			"isName" : false
+			},
+			{
+			"text" : "ULS - Unzipped log (dynamic)",
+			"value" : "$persist_path$/ULS/",
+			"isName" : true
+			},
+			{
+			"text" : "ULS - Zipped log (dynamic)",
+			"value" : "$persist_path$/ZLOG/",
+			"isName" : true
+			},
+			{
+			"text" : "Users - Addressbook",
+			"value" : "$persist_path$/Users/Contacts.json",
+			"isName" : false
+			},
+			{
+			"text" : "Users - Database",
+			"value" : "$persist_path$/Users/UserID.db.sqlite",
+			"isName" : false
+			},
+			{
+			"text" : "Users - Recovery driver session",
+			"value" : "$persist_path$/Users/LoginRecoveryDriver.sky",
+			"isName" : false
+			},
+			{
+			"text" : "Users - Same driver detection",
+			"value" : "$persist_path$/Users/LoginSameDriverDetection.sky",
+			"isName" : false
+			}
+	  ],
+	  "ulsLogsFunctionsList": [
+            {
+               "text": "NAVIGATION",
+               "value": [
+                    "DATAUPGR",
+                    "FAVORITES",
+                    "GPS",
+                    "LOGALL",
+                    "NAVIGATI",
+                    "PERIPHER",
+                    "ROUTES",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "PLANNING",
+                "value": [
+                    "LOGALL",
+                    "PERIPHER",
+                    "PLANNING",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "RDD",
+                "value": [
+                    "LOGALL",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "EXTERNAL CARDREADER (READOUT)",
+                "value": [
+                    "LOGALL",
+                    "PERIPHER",
+                    "SMARTCAR",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "COMMUNICATION",
+                "value": [
+                    "COMM_SES",
+                    "LOGALL",
+                    "MODEMLOG",
+                    "OTASTORE",
+                    "PERIPHER",
+                    "SMSVOICE",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "DOCSCAN",
+                "value": [
+                    "DOCSCAN",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "DOCUMENT BROWSER",
+                "value": [
+                    "DATAUPGR",
+                    "DOCBROWS",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "TXPDFRDR",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "ECO",
+                "value": [
+                    "CAN",
+                    "ECO",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "SERVICE TIMES",
+                "value": [
+                    "KLINE",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SERVICET",
+                    "SYSTEMLO",
+                    "TACHO_DA",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "LOGIN/LOGOUT",
+                "value": [
+                    "KLINE",
+                    "LOGALL",
+                    "LOGINMAN",
+                    "PERIPHER",
+                    "SMARTCAR",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "E-WTR",
+                "value": [
+                    "LOGALL",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "TRAILER",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "DRIVING / STANDSTILL",
+                "value": [
+                    "ACTIONMA",
+                    "DRIVELOG",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SPPROV",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "ALLOWANCES",
+                "value": [
+                    "ALLOWANC",
+                    "ISENGINE",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "INSTRUCTION SET (QP)",
+                "value": [
+                    "ACTIONMA",
+                    "ISENGINE",
+                    "LOGALL",
+                    "PERIPHER",
+                    "PLANNING",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "INSTRUCTION SET (ACTIVITIES)",
+                "value": [
+                    "ACTIONMA",
+                    "DRIVELOG",
+                    "ISENGINE",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "DAY/NIGHT & BLACKSCREEN",
+                "value": [
+                    "LOGALL",
+                    "PERIPHER",
+                    "POWERMG",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "TIME ISSUE",
+                "value": [
+                    "GPS",
+                    "LOGALL",
+                    "MODEMLOG",
+                    "OTASTORE",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "TIMEDIFF",
+                    "TIMEZONE",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "TEXT MESSAGE",
+                "value": [
+                    "LOGALL",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "TXTMESSL",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "REMOTE UPDATE",
+                "value": [
+                    "LOGALL",
+                    "MODEMLOG",
+                    "PERIPHER",
+                    "RULOG",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "PTO",
+                "value": [
+                    "ACTIONMA",
+                    "ECO",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "RESETS (normal boot)",
+                "value": [
+                    "CRASHD",
+                    "LOGALL",
+                    "MODEMLOG",
+                    "PERIPHER",
+                    "SMSVOICE",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "RESETS (watchdog as from 1.14.16062)",
+                "value": [
+                    "ACTIONMA",
+                    "ALARMS",
+                    "ALLOWANC",
+                    "APPLOG",
+                    "BTSERVER",
+                    "CAN",
+                    "COMM_SES",
+                    "COMPORTM",
+                    "CRASHD",
+                    "DATAUPGR",
+                    "DEVICEID",
+                    "DIAGNOST",
+                    "DOCBROWS",
+                    "DOCSCAN",
+                    "DOORLOCK",
+                    "DRIVELOG",
+                    "DRIVERCO",
+                    "ECO",
+                    "ENVIRONM",
+                    "EXTERNAL",
+                    "F_CRASH",
+                    "F_FLEX",
+                    "F_IS",
+                    "F_SERVER",
+                    "F_SKY",
+                    "F_UI",
+                    "FAVORITES",
+                    "GPS",
+                    "IO",
+                    "ISENGINE",
+                    "JSONDECO",
+                    "KLINE",
+                    "LOGALL",
+                    "LOGINMAN",
+                    "MODEMLOG",
+                    "NAVIGATI",
+                    "NETWORK",
+                    "OTASTORE",
+                    "PERIPHER",
+                    "PLANNING",
+                    "POWERMG",
+                    "QMLLOG",
+                    "QRCODE",
+                    "RAW_CAN",
+                    "RAW_COM0",
+                    "RAW_COM1",
+                    "RAW_COM2",
+                    "RAW_COM3",
+                    "RAW_COM4",
+                    "RAW_COM5",
+                    "RAW_COM6",
+                    "RAW_COM7",
+                    "RAW_COM8",
+                    "RAW_COM9",
+                    "RAW_ECO5",
+                    "RAW_IO",
+                    "RAW_LIN",
+                    "RAW_RDD1",
+                    "RAW_RDD2",
+                    "RAW_SCD",
+                    "RAW_VCA1",
+                    "RAW_VCA2",
+                    "RAW_VCA3",
+                    "RAW_VCA4",
+                    "RAW_VCA5",
+                    "RAW_VCA6",
+                    "RAW_VTR1",
+                    "RAW_VTR2",
+                    "RAW_WTR1",
+                    "RDD",
+                    "REEFER",
+                    "ROUTES",
+                    "RULOG",
+                    "SENSORS",
+                    "SERVICET",
+                    "SKYFLEX",
+                    "SMARTCAR",
+                    "SMSVOICE",
+                    "SPPROV",
+                    "STATUSRE",
+                    "STORAGE",
+                    "SYSCORE",
+                    "SYSTEMLO",
+                    "TACHO_DA",
+                    "THREADLOG",
+                    "TIMEDIFF",
+                    "TIMEZONE",
+                    "TQTCONF",
+                    "TQTSTORE",
+                    "TQTWORKE",
+                    "TRAILER",
+                    "TSIMULAT",
+                    "TXFLEX",
+                    "TXPDFRDR",
+                    "TXTMESSL",
+                    "UILOG",
+                    "ULSAPPEN",
+                    "UTI"
+                ]
+            },
+            {
+                "text": "TX-FLEX",
+                "value": [
+                    "CAN",
+                    "F_CRASH",
+                    "F_FLEX",
+                    "F_IS",
+                    "F_SERVER",
+                    "F_SKY",
+                    "F_UI",
+                    "LOGALL",
+                    "PERIPHER",
+                    "PLANNING",
+                    "QRCODE",
+                    "SKYFLEX",
+                    "SYSTEMLO",
+                    "TXFLEX",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "ALARMS",
+                "value": [
+                    "JSONDECO",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SENSORS",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "SENSORS",
+                "value": [
+                    "JSONDECO",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SENSORS",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "POSITIONS / GPS",
+                "value": [
+                    "GPS",
+                    "LOGALL",
+                    "MODEMLOG",
+                    "PERIPHER",
+                    "SENSORS",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "USER INTERFACE",
+                "value": [
+                    "LOGALL",
+                    "PERIPHER",
+                    "QMLLOG",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "REEFER",
+                "value": [
+                    "LOGALL",
+                    "PERIPHER",
+                    "REEFER",
+                    "SENSORS",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "EBS",
+                "value": [
+                    "CAN",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SENSORS",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "SOURCE DETECTION (speed/odo/rpm)",
+                "value": [
+                    "ACTIONMA",
+                    "IO",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SPPROV",
+                    "SYSTEMLO",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "CONFIGURATION",
+                "value": [
+                    "DRIVERCO",
+                    "LOGALL",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "TQTCONF",
+                    "TQTSTORE",
+                    "TQTWORKE",
+                    "UILOG"
+                ]
+            },
+            {
+                "text": "ULS",
+                "value": [
+                    "LOGALL",
+                    "PERIPHER",
+                    "SYSTEMLO",
+                    "UILOG",
+                    "ULSAPPEN"
+        ]
+      }],
+      "defaultProfileSettings": {
+        "TX-SKY": {
+			"deviceType": "TX-SKY",
+			"deviceActivityManagerSetting_Synchronization": false,
+			"deviceActivityManagerSetting_WhatHappensAfterXSeconds": 30,
+			"deviceAllowanceSecuritySetting_AllowanceEntry": 0,
+			"deviceAntiStartSetting_AntiStartMode":0,
+			"deviceAntiStartSetting_AntiStartAutoDelay":15,
+			"deviceBreak45MinCalculationSetting_Amplitude" : true,
+			"deviceCardReaderSetting_Available": "cardreader disabled",
+		  	"deviceCanGatewaySetting_CanGateway": false,
+		  	"deviceCanGatewaySetting_BasicTrailerData": false,
+		  	"deviceCanGatewaySetting_AxleLoadTruckTrailer": false,
+		  	"deviceCanGatewaySetting_TirePressureTruckTrailer": false,
+		  	"deviceCanGatewaySetting_TelltaleTruck": false,
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving": 10,
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving": 30,
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving": 180,
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving": 180,
+			"deviceDocScanSetting_Availability": "Not active",
+			"deviceDocScanSetting_Color": "Black and white",
+			"deviceDocScanSetting_DpiSize": "200 dpi",
+			"deviceDocScanSetting_DriverCalibration": false,
+			"deviceEcoSetting_EcoActivation": "Not active",
+			"deviceEcoSetting_DeviceEcoGeneralSetting": {
+				"DeviceEcoPermanentMonitoringSetting": {
+					"EcoVersion": 2,
+					"FuelThreshold": 60,
+					"GreenSpotLowRpmThreshold": 1000,
+					"GreenSpotHighRpmThreshold": 1600,
+					"HarshAccelerationThreshold": 10,
+					"TorqueThreshold": 90
+				},
+				"DeviceEcoRibasSetting": {
+					"WarningLevelBreaking": 24,
+					"WarningLevelIdling": 45,
+					"WarningLevelRevving": 1400,
+					"WarningLevelSpeeding": 85
+				},
+				"HarshBrakeThreshold": 30,
+				"IdleTimeDurationThreshold": 120,
+				"RpmThreshold": 1700,
+				"SpeedThreshold": 90
+			},
+			"deviceEnvironmentSetting_EngineSpeedSource": "can",
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect": true,
+			"deviceEnvironmentSetting_IsEngineSpeedSourceAutoDetect": true,
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect": true,
+			"deviceEnvironmentSetting_OdoMeterSource": "can",
+			"deviceEnvironmentSetting_SpeedSource": "can",
+			"deviceGprsModemSetting_Apn1": "objcobytel.com",
+			"deviceGprsModemSetting_Apn2": "transics5.be",
+			"deviceGprsModemSetting_DnsServer1": "",
+			"deviceGprsModemSetting_DnsServer2": "",
+			"deviceGprsModemSetting_GprsPassword": null,
+			"deviceGprsModemSetting_GprsUser": null,
+			"deviceGprsModemSetting_PinCode": "0000",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection": true,
+			"deviceHarshBrakeSetting_HarshBrakeValue": 0,
+			"deviceIOUnitSetting_PulsMileage": 2000,
+			"deviceLoginSetting_IsCodriverLoginAllowed": true,
+			"deviceLoginSetting_IsPasswordRequired": false,
+			"deviceLoginSetting_IsTachocardLoginAllowed": true,
+			"deviceMassMemorySetting_Active": true,
+			"deviceMassMemorySetting_RDDSessionTriggeringAllowed": false,
+			"deviceNavigationSetting_ADR": false,
+			"deviceNavigationSetting_ADREditable" : true,
+			"deviceNavigationSetting_AxleWeight": 0,
+			"deviceNavigationSetting_DimensionsEditable": true,
+			"deviceNavigationSetting_Height": 0,
+			"deviceNavigationSetting_Length": 0,
+			"deviceNavigationSetting_Weight": 0,
+			"deviceNavigationSetting_Width": 0,
+			"deviceNetworkConfigurationSetting_DestinationPort": <%= @config["mytransics"]["service"]["settings"]["destinationPort"] %>,
+			"deviceNetworkConfigurationSetting_DestionationServer": "<%= @config["mytransics"]["service"]["settings"]["destinationServer"] %>",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputType": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputValue": 0,
+			"devicePlanningUISetting_PlanningUI":0,
+            "devicePlanningUISetting_SecurePlanningOrder": 0,
+			"devicePTOSetting_PTOExtensionKit": false,
+			"deviceReeferSetting_ReeferActivation": false,
+			"deviceReeferSetting_ReeferSecondaryConnectionActivation": false,
+			"deviceReeferSetting_Reefer2Way": false,
+			"deviceServiceTimesSetting_ConsecutiveServiceTime6HVisibility": true,
+			"deviceServiceTimesSetting_ConsecutiveServiceTime9HVisibility": true,
+			"deviceServiceTimesSetting_DailyWorkAvailableVisibility": true,
+			"deviceServiceTimesSetting_DailyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_MonthlyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_WeeklyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_WeeklyWorkAvailableVisibility": true,
+			"deviceStatusReportIntervalSetting_HeadingChange": 0,
+			"deviceStatusReportIntervalSetting_IntervalDriving": 120,
+			"deviceStatusReportIntervalSetting_IntervalNotDriving": 3600,
+			"deviceStatusReportIntervalSetting_MileageInterval": 0,
+			"deviceTachoConnectionSetting_TachoType": "digitach synchro (new protocol)",
+			"deviceTelephoneSetting_Active":0,
+			"deviceTelephoneSetting_DrivingCallIn":0,
+			"deviceTelephoneSetting_DrivingCallOut":0,
+			"deviceTelephoneSetting_FreeCallIn":0,
+			"deviceTelephoneSetting_FreeCallOut":0,
+			"deviceTelephoneSetting_MicrophoneSensitivity":0,
+			"deviceTelephoneSetting_PinCode":"",
+			"deviceTemperatureWidgetSetting_TemperatureWidgetVisible": false,
+			"deviceTrailerRecognitionConfigurationSetting_Availability": false,
+			"deviceTrailerRecognitionConfigurationSetting_DecoupleOnStandstill": 4,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToCoupleWhileDriving": 6,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileDriving": 6,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileStandstill": false,
+			"deviceVolumeConfigurationSetting_DeviceVolume": null,
+			"docBrowserSettings_Active": true,
+			"docBrowserSettings_MaxFileSizeFromDevice": 0,
+			"docBrowserSettings_MaxFileSizeToDevice": 0,
+			"remoteDiagnosticsDeviceSetting_RemoteDiagnostics": false,
+			"sMSPositionSettings_Position": false,
+			"sMSPositionSettings_HomeBaseNumber":"",
+			"sMSPositionSettings_CentralNumber":"",
+			"sosActivationSetting_SosButtonAvailable": 0,
+			"sosActivationSetting_SosButtonSource": 1,
+			"textMessagePopupConfigurationSetting_TextMessagePopupConfiguration": false,
+			"transicsimCard": true,
+			"txFlexFunctionalConfigurationSetting_Signature": "",
+			"txFlexFunctionalConfigurationSetting_Process": "",
+			"txFlexFunctionalConfigurationSetting_Pallet": "",
+			"txFlexFunctionalConfigurationSetting_Picture": "",
+			"txFlexFunctionalConfigurationSetting_Scan": "",
+			"txFlexFunctionalConfigurationSetting_UsageAtWork": "",
+			"txFlexFunctionalConfigurationSetting_UsageAtHome": "",
+            "txFlexFunctionalConfigurationSetting_General": "",
+            "txFlexTechnicalConfigurationSetting_ThirdParty": "",
+			"tXFlexSettings_Active": false,
+			"tXFlexSettings_CommunicationAllowed": 0,
+			"tXFlexSettings_PictureTransferSize": 0,
+			"txFlexTechnicalConfigurationSetting_VersionFlag": "",
+			"txFlexTechnicalConfigurationSetting_VersionRequired": "",
+			"uISecurityConfigurationSetting_UISecurityConfiguration": false,
+		    "serverDeviceSetting_RemoteDiagnostics" : false
+        },
+        "TX-SKY simulator": {
+        	"deviceType": "TX-SKY simulator",
+			"deviceActivityManagerSetting_Synchronization": false,
+			"deviceActivityManagerSetting_WhatHappensAfterXSeconds": 30,
+			"deviceAllowanceSecuritySetting_AllowanceEntry": 0,
+			"deviceAntiStartSetting_AntiStartMode":0,
+			"deviceAntiStartSetting_AntiStartAutoDelay":15,
+			"deviceBreak45MinCalculationSetting_Amplitude" : true,
+			"deviceCardReaderSetting_Available": "cardreader disabled",
+		  	"deviceCanGatewaySetting_CanGateway": false,
+		  	"deviceCanGatewaySetting_BasicTrailerData": false,
+		  	"deviceCanGatewaySetting_AxleLoadTruckTrailer": false,
+		  	"deviceCanGatewaySetting_TirePressureTruckTrailer": false,
+		  	"deviceCanGatewaySetting_TelltaleTruck": false,
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving": 10,
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving": 30,
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving": 180,
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving": 180,
+			"deviceDocScanSetting_Availability": "Not active",
+			"deviceDocScanSetting_Color": "Black and white",
+			"deviceDocScanSetting_DpiSize": "200 dpi",
+			"deviceDocScanSetting_DriverCalibration": false,
+			"deviceEcoSetting_EcoActivation": "Not active",
+			"deviceEcoSetting_DeviceEcoGeneralSetting": {
+				"DeviceEcoPermanentMonitoringSetting": {
+					"EcoVersion": 2,
+					"FuelThreshold": 60,
+					"GreenSpotLowRpmThreshold": 1000,
+					"GreenSpotHighRpmThreshold": 1600,
+					"HarshAccelerationThreshold": 10,
+					"TorqueThreshold": 90
+				},
+				"DeviceEcoRibasSetting": {
+					"WarningLevelBreaking": 24,
+					"WarningLevelIdling": 45,
+					"WarningLevelRevving": 1400,
+					"WarningLevelSpeeding": 85
+				},
+				"HarshBrakeThreshold": 30,
+				"IdleTimeDurationThreshold": 120,
+				"RpmThreshold": 1700,
+				"SpeedThreshold": 90
+			},
+			"deviceEnvironmentSetting_EngineSpeedSource": "can",
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect": true,
+			"deviceEnvironmentSetting_IsEngineSpeedSourceAutoDetect": true,
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect": true,
+			"deviceEnvironmentSetting_OdoMeterSource": "can",
+			"deviceEnvironmentSetting_SpeedSource": "can",
+			"deviceGprsModemSetting_Apn1": "objcobytel.com",
+			"deviceGprsModemSetting_Apn2": "transics5.be",
+			"deviceGprsModemSetting_DnsServer1": "",
+			"deviceGprsModemSetting_DnsServer2": "",
+			"deviceGprsModemSetting_GprsPassword": null,
+			"deviceGprsModemSetting_GprsUser": null,
+			"deviceGprsModemSetting_PinCode": "0000",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection": true,
+			"deviceHarshBrakeSetting_HarshBrakeValue": 0,
+			"deviceIOUnitSetting_PulsMileage": 2000,
+			"deviceLoginSetting_IsCodriverLoginAllowed": true,
+			"deviceLoginSetting_IsPasswordRequired": false,
+			"deviceLoginSetting_IsTachocardLoginAllowed": true,
+			"deviceMassMemorySetting_Active": true,
+			"deviceMassMemorySetting_RDDSessionTriggeringAllowed": false,
+			"deviceNavigationSetting_ADR": false,
+			"deviceNavigationSetting_ADREditable" : true,
+			"deviceNavigationSetting_AxleWeight": 0,
+			"deviceNavigationSetting_DimensionsEditable": true,
+			"deviceNavigationSetting_Height": 0,
+			"deviceNavigationSetting_Length": 0,
+			"deviceNavigationSetting_Weight": 0,
+			"deviceNavigationSetting_Width": 0,
+			"deviceNetworkConfigurationSetting_DestinationPort": <%= @config["mytransics"]["service"]["settings"]["destinationPort"] %>,
+			"deviceNetworkConfigurationSetting_DestionationServer": "<%= @config["mytransics"]["service"]["settings"]["destinationServer"] %>",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputType": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputValue": 0,
+			"devicePlanningUISetting_PlanningUI":0,
+			"devicePlanningUISetting_SecurePlanningOrder": 0,
+			"devicePTOSetting_PTOExtensionKit": false,
+			"deviceReeferSetting_ReeferActivation": false,
+		    "deviceReeferSetting_ReeferSecondaryConnectionActivation": false,
+			"deviceReeferSetting_Reefer2Way": false,
+			"deviceServiceTimesSetting_ConsecutiveServiceTime6HVisibility": true,
+			"deviceServiceTimesSetting_ConsecutiveServiceTime9HVisibility": true,
+			"deviceServiceTimesSetting_DailyWorkAvailableVisibility": true,
+			"deviceServiceTimesSetting_DailyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_MonthlyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_WeeklyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_WeeklyWorkAvailableVisibility": true,
+			"deviceStatusReportIntervalSetting_HeadingChange": 0,
+			"deviceStatusReportIntervalSetting_IntervalDriving": 120,
+			"deviceStatusReportIntervalSetting_IntervalNotDriving": 3600,
+			"deviceStatusReportIntervalSetting_MileageInterval": 0,
+			"deviceTachoConnectionSetting_TachoType": "digitach synchro (new protocol)",
+			"deviceTelephoneSetting_Active":0,
+			"deviceTelephoneSetting_DrivingCallIn":0,
+			"deviceTelephoneSetting_DrivingCallOut":0,
+			"deviceTelephoneSetting_FreeCallIn":0,
+			"deviceTelephoneSetting_FreeCallOut":0,
+			"deviceTelephoneSetting_MicrophoneSensitivity":0,
+			"deviceTelephoneSetting_PinCode":"",
+			"deviceTemperatureWidgetSetting_TemperatureWidgetVisible": false,
+			"deviceTrailerRecognitionConfigurationSetting_Availability": false,
+			"deviceTrailerRecognitionConfigurationSetting_DecoupleOnStandstill": 4,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToCoupleWhileDriving": 6,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileDriving": 6,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileStandstill": false,
+			"deviceVolumeConfigurationSetting_DeviceVolume": null,
+			"docBrowserSettings_Active": true,
+			"docBrowserSettings_MaxFileSizeFromDevice": 0,
+			"docBrowserSettings_MaxFileSizeToDevice": 0,
+			"remoteDiagnosticsDeviceSetting_RemoteDiagnostics": false,
+			"sMSPositionSettings_Position": false,
+			"sMSPositionSettings_HomeBaseNumber":"",
+			"sMSPositionSettings_CentralNumber":"",
+			"sosActivationSetting_SosButtonAvailable": 0,
+			"sosActivationSetting_SosButtonSource": 1,
+			"textMessagePopupConfigurationSetting_TextMessagePopupConfiguration": false,
+			"transicsimCard": true,
+			"txFlexFunctionalConfigurationSetting_Signature": "",
+			"txFlexFunctionalConfigurationSetting_Process": "",
+			"txFlexFunctionalConfigurationSetting_Pallet": "",
+			"txFlexFunctionalConfigurationSetting_Picture": "",
+			"txFlexFunctionalConfigurationSetting_Scan": "",
+			"txFlexFunctionalConfigurationSetting_UsageAtWork": "",
+			"txFlexFunctionalConfigurationSetting_UsageAtHome": "",
+            "txFlexFunctionalConfigurationSetting_General": "",
+			"tXFlexSettings_Active": false,
+			"tXFlexSettings_CommunicationAllowed": 0,
+			"tXFlexSettings_PictureTransferSize": 0,
+            "txFlexTechnicalConfigurationSetting_ThirdParty": "",
+			"txFlexTechnicalConfigurationSetting_VersionFlag": "",
+			"txFlexTechnicalConfigurationSetting_VersionRequired": "",
+			"uISecurityConfigurationSetting_UISecurityConfiguration": false,
+		    "serverDeviceSetting_RemoteDiagnostics" : false
+        },
+        "TX-GO": {
+			"deviceType": "TX-GO",
+		  	"deviceActivityManagerSetting_WhatHappensAfterXSeconds": 0,
+			"deviceAntiStartSetting_AntiStartMode":0,
+			"deviceBreak45MinCalculationSetting_Amplitude" : true,
+			"deviceCardReaderSetting_Available": "cardreader disabled",
+		  	"deviceCanGatewaySetting_CanGateway": false,
+		  	"deviceCanGatewaySetting_BasicTrailerData": false,
+		  	"deviceCanGatewaySetting_AxleLoadTruckTrailer": false,
+		  	"deviceCanGatewaySetting_TirePressureTruckTrailer": false,
+		  	"deviceCanGatewaySetting_TelltaleTruck": false,
+			"deviceEcoSetting_DeviceEcoGeneralSetting": {
+				"HarshBrakeThreshold": 30,
+				"IdleTimeDurationThreshold": 120,
+				"RpmThreshold": 1700,
+				"SpeedThreshold": 90,
+				"DeviceEcoPermanentMonitoringSetting": {
+					"EcoVersion":2,
+					"FuelThreshold": 60,
+					"GreenSpotLowRpmThreshold": 1000,
+					"GreenSpotHighRpmThreshold": 1600,
+					"HarshAccelerationThreshold": 10,
+					"TorqueThreshold": 90
+				},
+				"DeviceEcoRibasSetting": {
+					"WarningLevelBreaking": 24,
+					"WarningLevelIdling": 45,
+					"WarningLevelRevving": 1400,
+					"WarningLevelSpeeding": 85
+				}
+			},
+			"deviceEcoSetting_EcoActivation": "Not active",
+			"deviceEnvironmentSetting_EngineSpeedSource": "can",
+			"deviceEnvironmentSetting_IsEngineSpeedSourceAutoDetect": true,
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect": true,
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect": true,
+			"deviceEnvironmentSetting_OdoMeterSource": "can",
+			"deviceEnvironmentSetting_SpeedSource": "can",
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving": 10,
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving": 30,
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving": 180,
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving": 180,
+			"deviceGprsModemSetting_Apn1": "objcobytel.com",
+			"deviceGprsModemSetting_Apn2": "transics5.be",
+			"deviceGprsModemSetting_DnsServer1": "",
+			"deviceGprsModemSetting_DnsServer2": "",
+			"deviceGprsModemSetting_PinCode": "0000",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection": true,
+			"deviceHarshBrakeSetting_HarshBrakeValue": 0,
+			"deviceIOUnitSetting_PulsMileage": 2000,
+			"deviceLoginSetting_IsCodriverLoginAllowed": true,
+			"deviceLoginSetting_IsTachocardLoginAllowed": true,
+			"deviceMassMemorySetting_Active": true,
+			"deviceNetworkConfigurationSetting_DestinationPort": <%= @config["mytransics"]["service"]["settings"]["destinationPort"] %>,
+			"deviceNetworkConfigurationSetting_DestionationServer": "<%= @config["mytransics"]["service"]["settings"]["destinationServer"] %>",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputType": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputValue": 0,
+			"devicePTOSetting_PTOExtensionKit": false,
+			"deviceReeferSetting_ReeferActivation": false,
+		    "deviceReeferSetting_ReeferSecondaryConnectionActivation": false,
+			"deviceReeferSetting_Reefer2Way": false,
+			"deviceStatusReportIntervalSetting_HeadingChange": 0,
+			"deviceStatusReportIntervalSetting_IntervalDriving": 120,
+			"deviceStatusReportIntervalSetting_IntervalNotDriving": 3600,
+			"deviceStatusReportIntervalSetting_MileageInterval": 0,
+			"deviceTachoConnectionSetting_TachoType": "digitach synchro (new protocol)",
+			"deviceTrailerRecognitionConfigurationSetting_Availability": false,
+			"deviceTrailerRecognitionConfigurationSetting_DecoupleOnStandstill": 4,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToCoupleWhileDriving": 6,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileDriving": 6,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileStandstill": false,
+			"docBrowserSettings_MaxFileSizeToDevice": 0,
+            "remoteDiagnosticsDeviceSetting_RemoteDiagnostics" : false,
+			"sMSPositionSettings_Position": false,
+			"sMSPositionSettings_HomeBaseNumber":"",
+			"sMSPositionSettings_CentralNumber":"",
+			"sosActivationSetting_SosButtonSource": 1,
+			"sosActivationSetting_SosButtonAvailable": 0,
+			"transicsimCard": true,
+			"txFlexFunctionalConfigurationSetting_Signature": "",
+			"txFlexFunctionalConfigurationSetting_Process": "",
+			"txFlexFunctionalConfigurationSetting_Pallet": "",
+			"txFlexFunctionalConfigurationSetting_Picture": "",
+			"txFlexFunctionalConfigurationSetting_Scan": "",
+			"txFlexFunctionalConfigurationSetting_UsageAtWork": "",
+			"txFlexFunctionalConfigurationSetting_UsageAtHome": "",
+            "txFlexFunctionalConfigurationSetting_General": "",
+			"tXFlexSettings_Active": false,
+			"tXFlexSettings_CommunicationAllowed": 0,
+			"tXFlexSettings_PictureTransferSize": 0,
+          	"txFlexTechnicalConfigurationSetting_Navigation": "",
+            "txFlexTechnicalConfigurationSetting_ThirdParty": "",
+			"txFlexTechnicalConfigurationSetting_VersionFlag": "",
+			"txFlexTechnicalConfigurationSetting_VersionRequired": "",
+		  	"serverDeviceSetting_RemoteDiagnostics" : false
+        },
+        "TX-GO simulator": {
+			"deviceType": "TX-GO simulator",
+		  	"deviceActivityManagerSetting_WhatHappensAfterXSeconds": 0,
+			"deviceAntiStartSetting_AntiStartMode":0,
+			"deviceBreak45MinCalculationSetting_Amplitude" : true,
+			"deviceCardReaderSetting_Available": "cardreader disabled",
+		  	"deviceCanGatewaySetting_CanGateway": false,
+		  	"deviceCanGatewaySetting_BasicTrailerData": false,
+		  	"deviceCanGatewaySetting_AxleLoadTruckTrailer": false,
+		  	"deviceCanGatewaySetting_TirePressureTruckTrailer": false,
+		  	"deviceCanGatewaySetting_TelltaleTruck": false,
+			"deviceEcoSetting_DeviceEcoGeneralSetting": {
+				"HarshBrakeThreshold": 30,
+				"IdleTimeDurationThreshold": 120,
+				"RpmThreshold": 1700,
+				"SpeedThreshold": 90,
+				"DeviceEcoPermanentMonitoringSetting": {
+					"EcoVersion":2,
+					"FuelThreshold": 60,
+					"GreenSpotLowRpmThreshold": 1000,
+					"GreenSpotHighRpmThreshold": 1600,
+					"HarshAccelerationThreshold": 10,
+					"TorqueThreshold": 90
+				},
+				"DeviceEcoRibasSetting": {
+					"WarningLevelBreaking": 24,
+					"WarningLevelIdling": 45,
+					"WarningLevelRevving": 1400,
+					"WarningLevelSpeeding": 85
+				}
+			},
+			"deviceEcoSetting_EcoActivation": "Not active",
+			"deviceEnvironmentSetting_EngineSpeedSource": "can",
+			"deviceEnvironmentSetting_IsEngineSpeedSourceAutoDetect": true,
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect": true,
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect": true,
+			"deviceEnvironmentSetting_OdoMeterSource": "can",
+			"deviceEnvironmentSetting_SpeedSource": "can",
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving": 10,
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving": 30,
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving": 180,
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving": 180,
+			"deviceGprsModemSetting_Apn1": "objcobytel.com",
+			"deviceGprsModemSetting_Apn2": "transics5.be",
+			"deviceGprsModemSetting_DnsServer1": "",
+			"deviceGprsModemSetting_DnsServer2": "",
+			"deviceGprsModemSetting_PinCode": "0000",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection": true,
+			"deviceHarshBrakeSetting_HarshBrakeValue": 0,
+			"deviceIOUnitSetting_PulsMileage": 2000,
+			"deviceLoginSetting_IsCodriverLoginAllowed": true,
+			"deviceLoginSetting_IsTachocardLoginAllowed": true,
+			"deviceMassMemorySetting_Active": true,
+			"deviceNetworkConfigurationSetting_DestinationPort": <%= @config["mytransics"]["service"]["settings"]["destinationPort"] %>,
+			"deviceNetworkConfigurationSetting_DestionationServer": "<%= @config["mytransics"]["service"]["settings"]["destinationServer"] %>",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputType": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputValue": 0,
+			"devicePTOSetting_PTOExtensionKit": false,
+			"deviceReeferSetting_ReeferActivation": false,
+		    "deviceReeferSetting_ReeferSecondaryConnectionActivation": false,
+			"deviceReeferSetting_Reefer2Way": false,
+			"deviceServiceTimesSetting_ConsecutiveServiceTime6HVisibility": true,
+			"deviceServiceTimesSetting_ConsecutiveServiceTime9HVisibility": true,
+			"deviceServiceTimesSetting_DailyWorkAvailableVisibility": true,
+			"deviceServiceTimesSetting_DailyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_MonthlyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_WeeklyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_WeeklyWorkAvailableVisibility": true,
+			"deviceStatusReportIntervalSetting_HeadingChange": 0,
+			"deviceStatusReportIntervalSetting_IntervalDriving": 120,
+			"deviceStatusReportIntervalSetting_IntervalNotDriving": 3600,
+			"deviceStatusReportIntervalSetting_MileageInterval": 0,
+			"deviceTachoConnectionSetting_TachoType": "digitach synchro (new protocol)",
+			"deviceTrailerRecognitionConfigurationSetting_Availability": false,
+			"deviceTrailerRecognitionConfigurationSetting_DecoupleOnStandstill": 4,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToCoupleWhileDriving": 6,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileDriving": 6,
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileStandstill": false,
+			"docBrowserSettings_MaxFileSizeToDevice": 0,
+            "remoteDiagnosticsDeviceSetting_RemoteDiagnostics" : false,
+			"sMSPositionSettings_Position": false,
+			"sMSPositionSettings_HomeBaseNumber":"",
+			"sMSPositionSettings_CentralNumber":"",
+			"sosActivationSetting_SosButtonSource": 1,
+			"sosActivationSetting_SosButtonAvailable": 0,
+			"transicsimCard": true,
+			"txFlexFunctionalConfigurationSetting_Signature": "",
+			"txFlexFunctionalConfigurationSetting_Process": "",
+			"txFlexFunctionalConfigurationSetting_Pallet": "",
+			"txFlexFunctionalConfigurationSetting_Picture": "",
+			"txFlexFunctionalConfigurationSetting_Scan": "",
+			"txFlexFunctionalConfigurationSetting_UsageAtWork": "",
+			"txFlexFunctionalConfigurationSetting_UsageAtHome": "",
+            "txFlexFunctionalConfigurationSetting_General": "",
+			"tXFlexSettings_Active": false,
+			"tXFlexSettings_CommunicationAllowed": 0,
+			"tXFlexSettings_PictureTransferSize": 0,
+          	"txFlexTechnicalConfigurationSetting_Navigation": "",
+            "txFlexTechnicalConfigurationSetting_ThirdParty": "",
+			"txFlexTechnicalConfigurationSetting_VersionFlag": "",
+			"txFlexTechnicalConfigurationSetting_VersionRequired": "",
+		  	"serverDeviceSetting_RemoteDiagnostics" : false
+        },
+        "TX-TRAILERGUARD": {
+			"deviceType": "TX-TRAILERGUARD",
+		  	"deviceActivityManagerSetting_WhatHappensAfterXSeconds": 0,
+			"deviceDetectDrivingEndDrivingSetting_BatteryModeSpeedStartDriving": 6,
+			"deviceDetectDrivingEndDrivingSetting_BatteryModeSpeedStandstill": 6,
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving": 10,
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving": 6,
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving": 70,
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving": 180,
+			"deviceEbsSetting_AlarmActivationOptions": 0,
+			"deviceEbsSetting_AlarmDuration": 0,
+			"deviceEbsSetting_EbsActivation": false,
+			"deviceEbsSetting_EbsDiagnosticActivation": false,
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect": true,
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect": true,
+			"deviceEnvironmentSetting_OdoMeterSource": "ebs",
+			"deviceEnvironmentSetting_SpeedSource": "ebs",
+			"deviceGprsModemSetting_Apn1": "transics2.be",
+			"deviceGprsModemSetting_Apn2": "transics4.be",
+			"deviceGprsModemSetting_DnsServer1": "",
+			"deviceGprsModemSetting_DnsServer2": "",
+			"deviceGprsModemSetting_PinCode": "0000",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection": true,
+			"deviceGuardModeSetting_WakeUpMode": false,
+			"deviceHarshBrakeSetting_HarshBrakeValue": 0,
+			"deviceNetworkConfigurationSetting_DestinationPort": <%= @config["mytransics"]["service"]["settings"]["destinationPort"] %>,
+			"deviceNetworkConfigurationSetting_DestionationServer": "<%= @config["mytransics"]["service"]["settings"]["destinationServer"] %>",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputType": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputValue": 0,
+			"deviceServiceTimesSetting_ConsecutiveServiceTime6HVisibility": true,
+			"deviceServiceTimesSetting_ConsecutiveServiceTime9HVisibility": true,
+			"deviceServiceTimesSetting_DailyWorkAvailableVisibility": true,
+			"deviceServiceTimesSetting_DailyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_MonthlyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_WeeklyServiceTimeVisibility": true,
+			"deviceServiceTimesSetting_WeeklyWorkAvailableVisibility": true,
+			"deviceStatusReportIntervalSetting_BatteryModeIntervalDriving": 15,
+			"deviceStatusReportIntervalSetting_BatteryModeIntervalNotDriving": 1440,
+			"deviceStatusReportIntervalSetting_HeadingChange": 0,
+			"deviceStatusReportIntervalSetting_IntervalDriving": 300,
+			"deviceStatusReportIntervalSetting_IntervalNotDriving": 3600,
+			"deviceStatusReportIntervalSetting_MileageInterval": 0,
+			"deviceReeferSetting_ReeferActivation": false,
+		    "deviceReeferSetting_ReeferSecondaryConnectionActivation": false,
+			"deviceReeferSetting_AlarmActivationOptions": 0,
+			"deviceReeferSetting_AlarmDuration": 0,
+			"doorLockActivationSetting_DoorLockActivation": false,
+			"doorLockActivationSetting_DoorLockAlarm":false,
+			"sMSPositionSettings_CentralNumber":"",
+			"sMSPositionSettings_HomeBaseNumber":"",
+			"sMSPositionSettings_Position": false,
+			"deviceReeferSetting_Reefer2Way": false,
+			"linBusSetting_Active":false,
+			"masterCode": "",
+			"transicsimCard": true
+        },
+        "TX-TRAILERGUARD simulator": {
+			"deviceType": "TX-TRAILERGUARD simulator",
+		  	"deviceActivityManagerSetting_WhatHappensAfterXSeconds": 0,
+			"deviceDetectDrivingEndDrivingSetting_BatteryModeSpeedStartDriving": 6,
+			"deviceDetectDrivingEndDrivingSetting_BatteryModeSpeedStandstill": 6,
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving": 10,
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving": 6,
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving": 70,
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving": 180,
+			"deviceEbsSetting_AlarmActivationOptions": 0,
+			"deviceEbsSetting_AlarmDuration": 0,
+			"deviceEbsSetting_EbsActivation": false,
+			"deviceEbsSetting_EbsDiagnosticActivation": false,
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect": true,
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect": true,
+			"deviceEnvironmentSetting_OdoMeterSource": "ebs",
+			"deviceEnvironmentSetting_SpeedSource": "ebs",
+			"deviceGprsModemSetting_Apn1": "transics2.be",
+			"deviceGprsModemSetting_Apn2": "transics4.be",
+			"deviceGprsModemSetting_DnsServer1": "",
+			"deviceGprsModemSetting_DnsServer2": "",
+			"deviceGprsModemSetting_PinCode": "0000",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection": true,
+			"deviceGuardModeSetting_WakeUpMode": false,
+			"deviceHarshBrakeSetting_HarshBrakeValue": 0,
+			"deviceNetworkConfigurationSetting_DestinationPort": <%= @config["mytransics"]["service"]["settings"]["destinationPort"] %>,
+			"deviceNetworkConfigurationSetting_DestionationServer": "<%= @config["mytransics"]["service"]["settings"]["destinationServer"] %>",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputType": 0,
+		    "deviceNoCommunicationAlarmSetting_UserInputValue": 0,
+			"deviceStatusReportIntervalSetting_BatteryModeIntervalDriving": 15,
+			"deviceStatusReportIntervalSetting_BatteryModeIntervalNotDriving": 1440,
+			"deviceStatusReportIntervalSetting_HeadingChange": 0,
+			"deviceStatusReportIntervalSetting_IntervalDriving": 300,
+			"deviceStatusReportIntervalSetting_IntervalNotDriving": 3600,
+			"deviceStatusReportIntervalSetting_MileageInterval": 0,
+			"deviceReeferSetting_ReeferActivation": false,
+			"deviceReeferSetting_AlarmActivationOptions": 0,
+			"deviceReeferSetting_AlarmDuration": 0,
+			"doorLockActivationSetting_DoorLockActivation": false,
+			"doorLockActivationSetting_DoorLockAlarm":false,
+			"sMSPositionSettings_CentralNumber":"",
+			"sMSPositionSettings_HomeBaseNumber":"",
+			"sMSPositionSettings_Position": false,
+			"deviceReeferSetting_Reefer2Way": false,
+			"linBusSetting_Active":false,
+			"masterCode": "",
+			"transicsimCard": true
+        },
+		 "TX-SMART": {
+          "deviceType": "TX-SMART",
+          "txSmartVersionSetting_AppUrl": "http://www.tx-connect.com/apps/TX-Smart/Tx-Smart_Android_App_8.1.0.4.apk",
+          "txSmartVersionSetting_AppVersion": "8.1.0.4",
+		  "txSmartGpsSetting_Interval": 5,
+		  "txSmartGpsSetting_IntervalUnit": 0,
+		  "txSmartGpsSetting_UseUtcInWs": true,
+		  "txSmartGpsSetting_UseGps": true,
+		  "txSmartGpsSetting_UseGpsAfterLogout": true,
+		  "txSmartGpsSetting_ActivateNavigation": false,
+		  "txSmartLoginSetting_LoginDriverCodeRequired" : false,
+		  "txSmartLoginSetting_DoubleDriverLoginPopup": true,
+		  "txSmartLoginSetting_DirectLoginViaScanningBarcode": 0,
+		  "txSmartFeaturesSetting_BlockMileagePopup":true,
+		  "txSmartFeaturesSetting_BlockPlaceLandingScreen": false,
+		  "txSmartFeaturesSetting_BlockActivityModule":false,
+		  "txSmartFeaturesSetting_BlockTrailerModule":false,
+		  "txSmartFeaturesSetting_BlockBarcodeScanningOnProduct":false,
+		  "txSmartFeaturesSetting_BlockDigitalSignature":true,
+		  "txSmartFeaturesSetting_BlockPhotoFunctionality":true,
+		  "txSmartFeaturesSetting_UseCustomerLogo":false,
+		  "txSmartFeaturesSetting_UrlLogos":"",
+		  "txSmartFeaturesSetting_DetectDrivingViaGps":false,
+		  "txSmartFeaturesSetting_ShowUpdates":0,
+		  "txSmartFeaturesSetting_ActivateTransfollow":false,
+		  "txSmartFeaturesSetting_ActivateEcmr":"",
+		  "txSmartPlanningSetting_ShowTrips": 1,
+		  "txSmartPlanningSetting_CloseTripWithOpenPlaces":false,
+		  "txSmartPlanningSetting_EnableCommentExpand":true,
+		  "txSmartPlanningSetting_AllowSuspendAPlace":0,
+		  "txSmartPlanningSetting_StartNewPlace":false,
+		  "txSmartPlanningSetting_UseSupportedBuildIn":"",
+		  "txSmartPlanningSetting_AllowProductManualCheckoffViaTapping":false,
+		  "txSmartPlanningSetting_ShowNotScannedProducts":false,
+		  "txSmartPlanningSetting_DoPlaceBasedOnPlanningOrder":false,
+		  "txSmartPlanningSetting_BlockPopupCommentStopActivity":true,
+		  "txSmartPlanningSetting_BlockPlanningModule":true,
+		  "txSmartPerformanceSetting_DaysInboxTextMessage":5,
+		  "txSmartPerformanceSetting_DaysOutboxMessageInput":7,
+		  "txSmartPerformanceSetting_DaysPlanningReceived":7,
+		  "txSmartPerformanceSetting_GpsModificationInterval":5
+        }
+      },
+      "deviceAvailableSettings": {
+        "TX-SKY": [
+			"deviceType",
+			"deviceActivityManagerSetting_Synchronization",
+			"deviceActivityManagerSetting_WhatHappensAfterXSeconds",
+			"deviceAllowanceSecuritySetting_AllowanceEntry",
+			"deviceAntiStartSetting_AntiStartMode",
+			"deviceAntiStartSetting_AntiStartAutoDelay",
+			"deviceBreak45MinCalculationSetting_Amplitude",
+			"deviceCardReaderSetting_Available",
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving",
+			"deviceDocScanSetting_Availability",
+			"deviceDocScanSetting_Color",
+			"deviceDocScanSetting_DpiSize",
+			"deviceDocScanSetting_DriverCalibration",
+			"deviceEcoSetting_EcoActivation",
+			"deviceEcoSetting_DeviceEcoGeneralSetting",
+			"DeviceEcoPermanentMonitoringSetting",
+			"EcoVersion",
+			"FuelThreshold",
+			"GreenSpotLowRpmThreshold",
+			"GreenSpotHighRpmThreshold",
+			"HarshAccelerationThreshold",
+			"TorqueThreshold",
+			"DeviceEcoRibasSetting",
+			"WarningLevelBreaking",
+			"WarningLevelIdling",
+			"WarningLevelRevving",
+			"WarningLevelSpeeding",
+			"HarshBrakeThreshold",
+			"IdleTimeDurationThreshold",
+			"RpmThreshold",
+			"SpeedThreshold",
+			"deviceCanGatewaySetting_CanGateway",
+			"deviceCanGatewaySetting_BasicTrailerData",
+			"deviceCanGatewaySetting_AxleLoadTruckTrailer",
+			"deviceCanGatewaySetting_TirePressureTruckTrailer",
+			"deviceCanGatewaySetting_TelltaleTruck",
+			"deviceEnvironmentSetting_EngineSpeedSource",
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect",
+			"deviceEnvironmentSetting_IsEngineSpeedSourceAutoDetect",
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect",
+			"deviceEnvironmentSetting_OdoMeterSource",
+			"deviceEnvironmentSetting_SpeedSource",
+			"deviceGprsModemSetting_Apn1",
+			"deviceGprsModemSetting_Apn2",
+			"deviceGprsModemSetting_DnsServer1",
+			"deviceGprsModemSetting_DnsServer2",
+			"deviceGprsModemSetting_GprsPassword",
+			"deviceGprsModemSetting_GprsUser",
+			"deviceGprsModemSetting_PinCode",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection",
+			"deviceHarshBrakeSetting_HarshBrakeValue",
+			"deviceIOUnitSetting_PulsMileage",
+			"deviceLoginSetting_IsCodriverLoginAllowed",
+			"deviceLoginSetting_IsPasswordRequired",
+			"deviceLoginSetting_IsTachocardLoginAllowed",
+			"deviceMassMemorySetting_Active",
+			"deviceNavigationSetting_ADR",
+			"deviceNavigationSetting_ADREditable",
+			"deviceNavigationSetting_AxleWeight",
+			"deviceNavigationSetting_DimensionsEditable",
+			"deviceNavigationSetting_Height",
+			"deviceNavigationSetting_Length",
+			"deviceMassMemorySetting_RDDSessionTriggeringAllowed",
+			"deviceNavigationSetting_Weight",
+			"deviceNavigationSetting_Width",
+			"deviceNetworkConfigurationSetting_DestinationPort",
+			"deviceNetworkConfigurationSetting_DestionationServer",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes",
+		    "deviceNoCommunicationAlarmSetting_UserInputType",
+		    "deviceNoCommunicationAlarmSetting_UserInputValue",
+			"devicePlanningUISetting_PlanningUI",
+			"devicePlanningUISetting_SecurePlanningOrder",
+			"devicePTOSetting_PTOExtensionKit",
+			"deviceReeferSetting_ReeferActivation",
+		    "deviceReeferSetting_ReeferSecondaryConnectionActivation",
+			"deviceReeferSetting_Reefer2Way",
+			"deviceServiceTimesSetting_ConsecutiveServiceTime6HVisibility",
+			"deviceServiceTimesSetting_ConsecutiveServiceTime9HVisibility",
+			"deviceServiceTimesSetting_DailyWorkAvailableVisibility",
+			"deviceServiceTimesSetting_DailyServiceTimeVisibility",
+			"deviceServiceTimesSetting_MonthlyServiceTimeVisibility",
+			"deviceServiceTimesSetting_WeeklyServiceTimeVisibility",
+			"deviceServiceTimesSetting_WeeklyWorkAvailableVisibility",
+			"deviceStatusReportIntervalSetting_HeadingChange",
+			"deviceStatusReportIntervalSetting_IntervalDriving",
+			"deviceStatusReportIntervalSetting_IntervalNotDriving",
+			"deviceStatusReportIntervalSetting_MileageInterval",
+			"deviceTachoConnectionSetting_TachoType",
+			"deviceTelephoneSetting_Active",
+			"deviceTelephoneSetting_DrivingCallIn",
+			"deviceTelephoneSetting_DrivingCallOut",
+			"deviceTelephoneSetting_FreeCallIn",
+			"deviceTelephoneSetting_FreeCallOut",
+			"deviceTelephoneSetting_MicrophoneSensitivity",
+			"deviceTelephoneSetting_PinCode",
+			"deviceTemperatureWidgetSetting_TemperatureWidgetVisible",
+			"deviceTrailerRecognitionConfigurationSetting_Availability",
+			"deviceTrailerRecognitionConfigurationSetting_DecoupleOnStandstill",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToCoupleWhileDriving",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileDriving",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileStandstill",
+			"deviceVolumeConfigurationSetting_DeviceVolume",
+			"docBrowserSettings_Active",
+			"docBrowserSettings_MaxFileSizeFromDevice",
+			"docBrowserSettings_MaxFileSizeToDevice",
+            "remoteDiagnosticsDeviceSetting_RemoteDiagnostics",
+			"sMSPositionSettings_Position",
+			"sMSPositionSettings_HomeBaseNumber",
+			"sMSPositionSettings_CentralNumber",
+			"sosActivationSetting_SosButtonAvailable",
+			"sosActivationSetting_SosButtonSource",
+			"textMessagePopupConfigurationSetting_TextMessagePopupConfiguration",
+			"transicsimCard",
+			"txFlexFunctionalConfigurationSetting_Signature",
+			"txFlexFunctionalConfigurationSetting_Process",
+			"txFlexFunctionalConfigurationSetting_Pallet",
+			"txFlexFunctionalConfigurationSetting_Picture",
+			"txFlexFunctionalConfigurationSetting_Scan",
+			"txFlexFunctionalConfigurationSetting_UsageAtWork",
+			"txFlexFunctionalConfigurationSetting_UsageAtHome",
+            "txFlexFunctionalConfigurationSetting_General",
+			"tXFlexSettings_Active",
+			"tXFlexSettings_CommunicationAllowed",
+			"tXFlexSettings_PictureTransferSize",
+            "txFlexTechnicalConfigurationSetting_ThirdParty",
+			"txFlexTechnicalConfigurationSetting_VersionFlag",
+			"txFlexTechnicalConfigurationSetting_VersionRequired",
+			"uISecurityConfigurationSetting_UISecurityConfiguration"
+        ],
+        "TX-SKY simulator": [
+			"deviceType",
+			"deviceActivityManagerSetting_Synchronization",
+			"deviceActivityManagerSetting_WhatHappensAfterXSeconds",
+			"deviceAllowanceSecuritySetting_AllowanceEntry",
+			"deviceAntiStartSetting_AntiStartMode",
+			"deviceAntiStartSetting_AntiStartAutoDelay",
+			"deviceBreak45MinCalculationSetting_Amplitude",
+			"deviceCardReaderSetting_Available",
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving",
+			"deviceDocScanSetting_Availability",
+			"deviceDocScanSetting_Color",
+			"deviceDocScanSetting_DpiSize",
+			"deviceDocScanSetting_DriverCalibration",
+			"deviceEcoSetting_EcoActivation",
+			"deviceEcoSetting_DeviceEcoGeneralSetting",
+			"DeviceEcoPermanentMonitoringSetting",
+			"EcoVersion",
+			"FuelThreshold",
+			"GreenSpotLowRpmThreshold",
+			"GreenSpotHighRpmThreshold",
+			"HarshAccelerationThreshold",
+			"TorqueThreshold",
+			"DeviceEcoRibasSetting",
+			"WarningLevelBreaking",
+			"WarningLevelIdling",
+			"WarningLevelRevving",
+			"WarningLevelSpeeding",
+			"HarshBrakeThreshold",
+			"IdleTimeDurationThreshold",
+			"RpmThreshold",
+			"SpeedThreshold",
+			"deviceCanGatewaySetting_CanGateway",
+			"deviceCanGatewaySetting_BasicTrailerData",
+			"deviceCanGatewaySetting_AxleLoadTruckTrailer",
+			"deviceCanGatewaySetting_TirePressureTruckTrailer",
+			"deviceCanGatewaySetting_TelltaleTruck",
+			"deviceEnvironmentSetting_EngineSpeedSource",
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect",
+			"deviceEnvironmentSetting_IsEngineSpeedSourceAutoDetect",
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect",
+			"deviceEnvironmentSetting_OdoMeterSource",
+			"deviceEnvironmentSetting_SpeedSource",
+			"deviceGprsModemSetting_Apn1",
+			"deviceGprsModemSetting_Apn2",
+			"deviceGprsModemSetting_DnsServer1",
+			"deviceGprsModemSetting_DnsServer2",
+			"deviceGprsModemSetting_GprsPassword",
+			"deviceGprsModemSetting_GprsUser",
+			"deviceGprsModemSetting_PinCode",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection",
+			"deviceHarshBrakeSetting_HarshBrakeValue",
+			"deviceIOUnitSetting_PulsMileage",
+			"deviceLoginSetting_IsCodriverLoginAllowed",
+			"deviceLoginSetting_IsPasswordRequired",
+			"deviceLoginSetting_IsTachocardLoginAllowed",
+			"deviceMassMemorySetting_Active",
+			"deviceMassMemorySetting_RDDSessionTriggeringAllowed",
+			"deviceNavigationSetting_ADR",
+			"deviceNavigationSetting_ADREditable",
+			"deviceNavigationSetting_AxleWeight",
+			"deviceNavigationSetting_DimensionsEditable",
+			"deviceNavigationSetting_Height",
+			"deviceNavigationSetting_Length",
+			"deviceMassMemorySetting_RDDSessionTriggeringAllowed",
+			"deviceNavigationSetting_Weight",
+			"deviceNavigationSetting_Width",
+			"deviceNetworkConfigurationSetting_DestinationPort",
+			"deviceNetworkConfigurationSetting_DestionationServer",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes",
+		    "deviceNoCommunicationAlarmSetting_UserInputType",
+		    "deviceNoCommunicationAlarmSetting_UserInputValue",
+			"devicePlanningUISetting_PlanningUI",
+			"devicePlanningUISetting_SecurePlanningOrder",
+			"devicePTOSetting_PTOExtensionKit",
+			"deviceReeferSetting_ReeferActivation",
+		    "deviceReeferSetting_ReeferSecondaryConnectionActivation",
+			"deviceReeferSetting_Reefer2Way",
+			"deviceServiceTimesSetting_ConsecutiveServiceTime6HVisibility",
+			"deviceServiceTimesSetting_ConsecutiveServiceTime9HVisibility",
+			"deviceServiceTimesSetting_DailyWorkAvailableVisibility",
+			"deviceServiceTimesSetting_DailyServiceTimeVisibility",
+			"deviceServiceTimesSetting_MonthlyServiceTimeVisibility",
+			"deviceServiceTimesSetting_WeeklyServiceTimeVisibility",
+			"deviceServiceTimesSetting_WeeklyWorkAvailableVisibility",
+			"deviceStatusReportIntervalSetting_HeadingChange",
+			"deviceStatusReportIntervalSetting_IntervalDriving",
+			"deviceStatusReportIntervalSetting_IntervalNotDriving",
+			"deviceStatusReportIntervalSetting_MileageInterval",
+			"deviceTachoConnectionSetting_TachoType",
+			"deviceTelephoneSetting_Active",
+			"deviceTelephoneSetting_DrivingCallIn",
+			"deviceTelephoneSetting_DrivingCallOut",
+			"deviceTelephoneSetting_FreeCallIn",
+			"deviceTelephoneSetting_FreeCallOut",
+			"deviceTelephoneSetting_MicrophoneSensitivity",
+			"deviceTelephoneSetting_PinCode",
+			"deviceTemperatureWidgetSetting_TemperatureWidgetVisible",
+			"deviceTrailerRecognitionConfigurationSetting_Availability",
+			"deviceTrailerRecognitionConfigurationSetting_DecoupleOnStandstill",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToCoupleWhileDriving",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileDriving",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileStandstill",
+			"deviceVolumeConfigurationSetting_DeviceVolume",
+			"docBrowserSettings_Active",
+			"docBrowserSettings_MaxFileSizeFromDevice",
+			"docBrowserSettings_MaxFileSizeToDevice",
+            "remoteDiagnosticsDeviceSetting_RemoteDiagnostics",
+			"sMSPositionSettings_Position",
+			"sMSPositionSettings_HomeBaseNumber",
+			"sMSPositionSettings_CentralNumber",
+			"sosActivationSetting_SosButtonAvailable",
+			"sosActivationSetting_SosButtonSource",
+			"textMessagePopupConfigurationSetting_TextMessagePopupConfiguration",
+			"transicsimCard",
+			"txFlexFunctionalConfigurationSetting_Signature",
+			"txFlexFunctionalConfigurationSetting_Process",
+			"txFlexFunctionalConfigurationSetting_Pallet",
+			"txFlexFunctionalConfigurationSetting_Picture",
+			"txFlexFunctionalConfigurationSetting_Scan",
+			"txFlexFunctionalConfigurationSetting_UsageAtWork",
+			"txFlexFunctionalConfigurationSetting_UsageAtHome",
+            "txFlexFunctionalConfigurationSetting_General",
+			"tXFlexSettings_Active",
+			"tXFlexSettings_CommunicationAllowed",
+			"tXFlexSettings_PictureTransferSize",
+            "txFlexTechnicalConfigurationSetting_ThirdParty",
+			"txFlexTechnicalConfigurationSetting_VersionFlag",
+			"txFlexTechnicalConfigurationSetting_VersionRequired",
+			"uISecurityConfigurationSetting_UISecurityConfiguration"
+        ],
+        "TX-GO": [
+          "deviceType",
+		  	"deviceActivityManagerSetting_WhatHappensAfterXSeconds",
+			"deviceAntiStartSetting_AntiStartMode",
+            "deviceBreak45MinCalculationSetting_Amplitude",
+			"deviceCardReaderSetting_Available",
+			"deviceEcoSetting_DeviceEcoGeneralSetting",
+            "deviceEcoSetting_EcoActivation",
+			"HarshBrakeThreshold",
+			"IdleTimeDurationThreshold",
+			"RpmThreshold",
+			"SpeedThreshold",
+			"DeviceEcoPermanentMonitoringSetting",
+			"EcoVersion",
+			"FuelThreshold",
+			"GreenSpotLowRpmThreshold",
+			"GreenSpotHighRpmThreshold",
+			"HarshAccelerationThreshold",
+			"TorqueThreshold",
+          	"DeviceEcoRibasSetting",
+          	"WarningLevelBreaking",
+          	"WarningLevelIdling",
+          	"WarningLevelRevving",
+          	"WarningLevelSpeeding",
+          	"HarshBrakeThreshold",
+          	"IdleTimeDurationThreshold",
+          	"RpmThreshold",
+          	"SpeedThreshold",
+			"deviceEcoSetting_EcoActivation",
+			"deviceEnvironmentSetting_EngineSpeedSource",
+			"deviceEnvironmentSetting_IsEngineSpeedSourceAutoDetect",
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect",
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect",
+			"deviceEnvironmentSetting_OdoMeterSource",
+			"deviceEnvironmentSetting_SpeedSource",
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving",
+			"deviceGprsModemSetting_Apn1",
+			"deviceGprsModemSetting_Apn2",
+			"deviceGprsModemSetting_DnsServer1",
+			"deviceGprsModemSetting_DnsServer2",
+			"deviceGprsModemSetting_PinCode",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection",
+			"deviceHarshBrakeSetting_HarshBrakeValue",
+			"deviceIOUnitSetting_PulsMileage",
+			"deviceLoginSetting_IsCodriverLoginAllowed",
+			"deviceLoginSetting_IsTachocardLoginAllowed",
+			"deviceMassMemorySetting_Active",
+			"deviceNetworkConfigurationSetting_DestinationPort",
+			"deviceNetworkConfigurationSetting_DestionationServer",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes",
+		    "deviceNoCommunicationAlarmSetting_UserInputType",
+		    "deviceNoCommunicationAlarmSetting_UserInputValue",
+			"devicePTOSetting_PTOExtensionKit",
+			"deviceReeferSetting_ReeferActivation",
+		    "deviceReeferSetting_ReeferSecondaryConnectionActivation",
+			"deviceReeferSetting_Reefer2Way",
+            "deviceServiceTimesSetting_ConsecutiveServiceTime6HVisibility",
+            "deviceServiceTimesSetting_ConsecutiveServiceTime9HVisibility",
+            "deviceServiceTimesSetting_DailyWorkAvailableVisibility",
+            "deviceServiceTimesSetting_DailyServiceTimeVisibility",
+            "deviceServiceTimesSetting_MonthlyServiceTimeVisibility",
+            "deviceServiceTimesSetting_WeeklyServiceTimeVisibility",
+            "deviceServiceTimesSetting_WeeklyWorkAvailableVisibility",
+			"deviceStatusReportIntervalSetting_HeadingChange",
+			"deviceStatusReportIntervalSetting_IntervalDriving",
+			"deviceStatusReportIntervalSetting_IntervalNotDriving",
+			"deviceStatusReportIntervalSetting_MileageInterval",
+			"deviceTachoConnectionSetting_TachoType",
+			"deviceTrailerRecognitionConfigurationSetting_Availability",
+			"deviceTrailerRecognitionConfigurationSetting_DecoupleOnStandstill",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToCoupleWhileDriving",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileDriving",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileStandstill",
+			"docBrowserSettings_MaxFileSizeToDevice",
+          	"remoteDiagnosticsDeviceSetting_RemoteDiagnostics",
+			"transicsimCard",
+         	"txFlexFunctionalConfigurationSetting_Signature",
+          	"txFlexFunctionalConfigurationSetting_Process",
+          	"txFlexFunctionalConfigurationSetting_Pallet",
+          	"txFlexFunctionalConfigurationSetting_Picture",
+          	"txFlexFunctionalConfigurationSetting_Scan",
+          	"txFlexFunctionalConfigurationSetting_UsageAtWork",
+          	"txFlexFunctionalConfigurationSetting_UsageAtHome",
+          	"txFlexFunctionalConfigurationSetting_General",
+          	"tXFlexSettings_Active",
+			"tXFlexSettings_CommunicationAllowed",
+          	"tXFlexSettings_PictureTransferSize",
+          	"txFlexTechnicalConfigurationSetting_Navigation",
+          	"txFlexTechnicalConfigurationSetting_ThirdParty",
+          	"txFlexTechnicalConfigurationSetting_VersionFlag",
+          	"txFlexTechnicalConfigurationSetting_VersionRequired",
+			"sMSPositionSettings_Position",
+			"sMSPositionSettings_HomeBaseNumber",
+			"sMSPositionSettings_CentralNumber",
+			"sosActivationSetting_SosButtonSource",
+			"sosActivationSetting_SosButtonAvailable",
+			"deviceCanGatewaySetting_CanGateway",
+			"deviceCanGatewaySetting_BasicTrailerData",
+			"deviceCanGatewaySetting_AxleLoadTruckTrailer",
+			"deviceCanGatewaySetting_TirePressureTruckTrailer",
+			"deviceCanGatewaySetting_TelltaleTruck"
+        ],
+        "TX-GO simulator": [
+          "deviceType",
+		  	"deviceActivityManagerSetting_WhatHappensAfterXSeconds",
+			"deviceAntiStartSetting_AntiStartMode",
+            "deviceBreak45MinCalculationSetting_Amplitude",
+			"deviceCardReaderSetting_Available",
+			"deviceEcoSetting_DeviceEcoGeneralSetting",
+            "deviceEcoSetting_EcoActivation",
+			"HarshBrakeThreshold",
+			"IdleTimeDurationThreshold",
+			"RpmThreshold",
+			"SpeedThreshold",
+			"DeviceEcoPermanentMonitoringSetting",
+			"EcoVersion",
+			"FuelThreshold",
+			"GreenSpotLowRpmThreshold",
+			"GreenSpotHighRpmThreshold",
+			"HarshAccelerationThreshold",
+			"TorqueThreshold",
+          	"DeviceEcoRibasSetting",
+          	"WarningLevelBreaking",
+          	"WarningLevelIdling",
+          	"WarningLevelRevving",
+          	"WarningLevelSpeeding",
+          	"HarshBrakeThreshold",
+          	"IdleTimeDurationThreshold",
+          	"RpmThreshold",
+          	"SpeedThreshold",
+			"deviceEcoSetting_EcoActivation",
+			"deviceEnvironmentSetting_EngineSpeedSource",
+			"deviceEnvironmentSetting_IsEngineSpeedSourceAutoDetect",
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect",
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect",
+			"deviceEnvironmentSetting_OdoMeterSource",
+			"deviceEnvironmentSetting_SpeedSource",
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving",
+			"deviceGprsModemSetting_Apn1",
+			"deviceGprsModemSetting_Apn2",
+			"deviceGprsModemSetting_DnsServer1",
+			"deviceGprsModemSetting_DnsServer2",
+			"deviceGprsModemSetting_PinCode",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection",
+			"deviceHarshBrakeSetting_HarshBrakeValue",
+			"deviceIOUnitSetting_PulsMileage",
+			"deviceLoginSetting_IsCodriverLoginAllowed",
+			"deviceLoginSetting_IsTachocardLoginAllowed",
+			"deviceMassMemorySetting_Active",
+			"deviceNetworkConfigurationSetting_DestinationPort",
+			"deviceNetworkConfigurationSetting_DestionationServer",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes",
+		    "deviceNoCommunicationAlarmSetting_UserInputType",
+		    "deviceNoCommunicationAlarmSetting_UserInputValue",
+			"devicePTOSetting_PTOExtensionKit",
+			"deviceReeferSetting_ReeferActivation",
+		    "deviceReeferSetting_ReeferSecondaryConnectionActivation",
+			"deviceReeferSetting_Reefer2Way",
+            "deviceServiceTimesSetting_ConsecutiveServiceTime6HVisibility",
+            "deviceServiceTimesSetting_ConsecutiveServiceTime9HVisibility",
+            "deviceServiceTimesSetting_DailyWorkAvailableVisibility",
+            "deviceServiceTimesSetting_DailyServiceTimeVisibility",
+            "deviceServiceTimesSetting_MonthlyServiceTimeVisibility",
+            "deviceServiceTimesSetting_WeeklyServiceTimeVisibility",
+            "deviceServiceTimesSetting_WeeklyWorkAvailableVisibility",
+			"deviceStatusReportIntervalSetting_HeadingChange",
+			"deviceStatusReportIntervalSetting_IntervalDriving",
+			"deviceStatusReportIntervalSetting_IntervalNotDriving",
+			"deviceStatusReportIntervalSetting_MileageInterval",
+			"deviceTachoConnectionSetting_TachoType",
+			"deviceTrailerRecognitionConfigurationSetting_Availability",
+			"deviceTrailerRecognitionConfigurationSetting_DecoupleOnStandstill",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToCoupleWhileDriving",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileDriving",
+			"deviceTrailerRecognitionConfigurationSetting_TimeToDecoupleWhileStandstill",
+			"docBrowserSettings_MaxFileSizeToDevice",
+          	"remoteDiagnosticsDeviceSetting_RemoteDiagnostics",
+			"transicsimCard",
+         	"txFlexFunctionalConfigurationSetting_Signature",
+          	"txFlexFunctionalConfigurationSetting_Process",
+          	"txFlexFunctionalConfigurationSetting_Pallet",
+          	"txFlexFunctionalConfigurationSetting_Picture",
+          	"txFlexFunctionalConfigurationSetting_Scan",
+          	"txFlexFunctionalConfigurationSetting_UsageAtWork",
+          	"txFlexFunctionalConfigurationSetting_UsageAtHome",
+          	"txFlexFunctionalConfigurationSetting_General",
+          	"tXFlexSettings_Active",
+			"tXFlexSettings_CommunicationAllowed",
+          	"tXFlexSettings_PictureTransferSize",
+          	"txFlexTechnicalConfigurationSetting_Navigation",
+          	"txFlexTechnicalConfigurationSetting_ThirdParty",
+          	"txFlexTechnicalConfigurationSetting_VersionFlag",
+          	"txFlexTechnicalConfigurationSetting_VersionRequired",
+			"sMSPositionSettings_Position",
+			"sMSPositionSettings_HomeBaseNumber",
+			"sMSPositionSettings_CentralNumber",
+			"sosActivationSetting_SosButtonSource",
+			"sosActivationSetting_SosButtonAvailable",
+			"deviceCanGatewaySetting_CanGateway",
+			"deviceCanGatewaySetting_BasicTrailerData",
+			"deviceCanGatewaySetting_AxleLoadTruckTrailer",
+			"deviceCanGatewaySetting_TirePressureTruckTrailer",
+			"deviceCanGatewaySetting_TelltaleTruck"
+        ],
+        "TX-TRAILERGUARD": [
+			"deviceActivityManagerSetting_WhatHappensAfterXSeconds",
+			"deviceDetectDrivingEndDrivingSetting_BatteryModeSpeedStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_BatteryModeSpeedStandstill",
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving",
+			"deviceEbsSetting_AlarmActivationOptions",
+			"deviceEbsSetting_AlarmDuration",
+			"deviceEbsSetting_EbsActivation",
+			"deviceEbsSetting_EbsDiagnosticActivation",
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect",
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect",
+			"deviceEnvironmentSetting_OdoMeterSource",
+			"deviceEnvironmentSetting_SpeedSource",
+			"deviceGprsModemSetting_Apn1",
+			"deviceGprsModemSetting_Apn2",
+			"deviceGprsModemSetting_DnsServer1",
+			"deviceGprsModemSetting_DnsServer2",
+			"deviceGprsModemSetting_PinCode",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection",
+			"deviceGuardModeSetting_WakeUpMode",
+			"deviceHarshBrakeSetting_HarshBrakeValue",
+			"deviceNetworkConfigurationSetting_DestinationPort",
+			"deviceNetworkConfigurationSetting_DestionationServer",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes",
+		    "deviceNoCommunicationAlarmSetting_UserInputType",
+		    "deviceNoCommunicationAlarmSetting_UserInputValue",
+			"deviceStatusReportIntervalSetting_BatteryModeIntervalDriving",
+			"deviceStatusReportIntervalSetting_BatteryModeIntervalNotDriving",
+			"deviceStatusReportIntervalSetting_HeadingChange",
+			"deviceStatusReportIntervalSetting_IntervalDriving",
+			"deviceStatusReportIntervalSetting_IntervalNotDriving",
+			"deviceStatusReportIntervalSetting_MileageInterval",
+			"deviceReeferSetting_ReeferActivation",
+		    "deviceReeferSetting_ReeferSecondaryConnectionActivation",
+			"deviceReeferSetting_AlarmActivationOptions",
+			"deviceReeferSetting_AlarmDuration",
+			"doorLockActivationSetting_DoorLockActivation",
+			"doorLockActivationSetting_DoorLockAlarm",
+			"sMSPositionSettings_CentralNumber",
+			"sMSPositionSettings_HomeBaseNumber",
+			"sMSPositionSettings_Position",
+			"deviceReeferSetting_Reefer2Way",
+			"linBusSetting_Active",
+			"masterCode",
+			"transicsimCard"
+        ],
+        "TX-TRAILERGUARD simulator": [
+			"deviceActivityManagerSetting_WhatHappensAfterXSeconds",
+			"deviceDetectDrivingEndDrivingSetting_BatteryModeSpeedStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_BatteryModeSpeedStandstill",
+			"deviceDetectDrivingEndDrivingSetting_DistanceStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_SpeedStartDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeEndDriving",
+			"deviceDetectDrivingEndDrivingSetting_TimeStartDriving",
+			"deviceEbsSetting_AlarmActivationOptions",
+			"deviceEbsSetting_AlarmDuration",
+			"deviceEbsSetting_EbsActivation",
+			"deviceEbsSetting_EbsDiagnosticActivation",
+			"deviceEnvironmentSetting_IsOdometerSourceAutoDetect",
+			"deviceEnvironmentSetting_IsSpeedSourceAutoDetect",
+			"deviceEnvironmentSetting_OdoMeterSource",
+			"deviceEnvironmentSetting_SpeedSource",
+			"deviceGprsModemSetting_Apn1",
+			"deviceGprsModemSetting_Apn2",
+			"deviceGprsModemSetting_DnsServer1",
+			"deviceGprsModemSetting_DnsServer2",
+			"deviceGprsModemSetting_PinCode",
+			"deviceGsmOperatorSelectionSetting_ManualGSMOperatorSelection",
+			"deviceGuardModeSetting_WakeUpMode",
+			"deviceHarshBrakeSetting_HarshBrakeValue",
+			"deviceNetworkConfigurationSetting_DestinationPort",
+			"deviceNetworkConfigurationSetting_DestionationServer",
+			"deviceNoCommunicationAlarmSetting_NoCommunicationAlarmAfterMinutes",
+		    "deviceNoCommunicationAlarmSetting_UserInputType",
+		    "deviceNoCommunicationAlarmSetting_UserInputValue",
+			"deviceStatusReportIntervalSetting_BatteryModeIntervalDriving",
+			"deviceStatusReportIntervalSetting_BatteryModeIntervalNotDriving",
+			"deviceStatusReportIntervalSetting_HeadingChange",
+			"deviceStatusReportIntervalSetting_IntervalDriving",
+			"deviceStatusReportIntervalSetting_IntervalNotDriving",
+			"deviceStatusReportIntervalSetting_MileageInterval",
+			"deviceReeferSetting_ReeferActivation",
+		    "deviceReeferSetting_ReeferSecondaryConnectionActivation",
+			"deviceReeferSetting_AlarmActivationOptions",
+			"deviceReeferSetting_AlarmDuration",
+			"doorLockActivationSetting_DoorLockActivation",
+			"doorLockActivationSetting_DoorLockAlarm",
+			"sMSPositionSettings_CentralNumber",
+			"sMSPositionSettings_HomeBaseNumber",
+			"sMSPositionSettings_Position",
+			"deviceReeferSetting_Reefer2Way",
+			"linBusSetting_Active",
+			"masterCode",
+			"transicsimCard"
+        ],
+		"TX-SMART": [
+          "deviceType",
+          "txSmartVersionSetting_AppUrl",
+          "txSmartVersionSetting_AppVersion",
+		  "txSmartGpsSetting_Interval",
+		  "txSmartGpsSetting_IntervalUnit",
+		  "txSmartGpsSetting_UseUtcInWs",
+		  "txSmartGpsSetting_UseGps",
+		  "txSmartGpsSetting_UseGpsAfterLogout",
+		  "txSmartGpsSetting_ActivateNavigation",
+		  "txSmartLoginSetting_LoginDriverCodeRequired",
+		  "txSmartLoginSetting_DoubleDriverLoginPopup",
+		  "txSmartLoginSetting_DirectLoginViaScanningBarcode",
+		  "txSmartFeaturesSetting_BlockMileagePopup",
+		  "txSmartFeaturesSetting_BlockPlaceLandingScreen",
+		  "txSmartFeaturesSetting_BlockActivityModule",
+		  "txSmartFeaturesSetting_BlockTrailerModule",
+		  "txSmartFeaturesSetting_BlockBarcodeScanningOnProduct",
+		  "txSmartFeaturesSetting_BlockDigitalSignature",
+		  "txSmartFeaturesSetting_BlockPhotoFunctionality",
+		  "txSmartFeaturesSetting_UseCustomerLogo",
+		  "txSmartFeaturesSetting_UrlLogos",
+		  "txSmartFeaturesSetting_DetectDrivingViaGps",
+		  "txSmartFeaturesSetting_ShowUpdates",
+		  "txSmartFeaturesSetting_ActivateTransfollow",
+		  "txSmartFeaturesSetting_ActivateEcmr",
+		  "txSmartPlanningSetting_ShowTrips",
+		  "txSmartPlanningSetting_CloseTripWithOpenPlaces",
+		  "txSmartPlanningSetting_EnableCommentExpand",
+		  "txSmartPlanningSetting_AllowSuspendAPlace",
+		  "txSmartPlanningSetting_StartNewPlace",
+		  "txSmartPlanningSetting_UseSupportedBuildIn",
+		  "txSmartPlanningSetting_AllowProductManualCheckoffViaTapping",
+		  "txSmartPlanningSetting_ShowNotScannedProducts",
+		  "txSmartPlanningSetting_DoPlaceBasedOnPlanningOrder",
+		  "txSmartPlanningSetting_BlockPopupCommentStopActivity",
+		  "txSmartPlanningSetting_BlockPlanningModule",
+		  "txSmartPerformanceSetting_DaysInboxTextMessage",
+		  "txSmartPerformanceSetting_DaysOutboxMessageInput",
+		  "txSmartPerformanceSetting_DaysPlanningReceived",
+		  "txSmartPerformanceSetting_GpsModificationInterval"
+        ]
+      }
+    }
+  }
+}
