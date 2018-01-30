@@ -25,6 +25,9 @@ define txservice::installation (
       env => $title
     })
   }
+  file { "/var/log/forever/${title}/forever.log": {
+    ensure => file
+  }
   exec {'install txservice':
     command => "/opt/${title}/fscripts/txservice.sh update ${version}",
     require => [File["/opt/${title}/fscripts/txservice.sh"]],
