@@ -27,6 +27,6 @@ define txservice::installation (
   }
   nginx::resource::server { "${server}:${port}":
     listen_port => $port,
-    proxy       => 'http://127.0.0.1:${nodeport}',
+    proxy       => "http://127.0.0.1:${nodeport}",
   }
 }
