@@ -1,26 +1,25 @@
 define txservice::installation (
-  $env = 'DS01',
   $url = 'http://dev.mytransics.com/npm/package/tx-service/1.25.0-21'
 ){
-  file { "/opt/${env}":
+  file { "/opt/${title}":
     ensure => directory,
   }
-  file { "/opt/${env}/configurations":
+  file { "/opt/${title}/configurations":
     ensure => directory,
   }
-  file { "/opt/${env}/etc":
+  file { "/opt/${title}/etc":
     ensure => directory,
   }
-  file { "/opt/${env}/fscripts":
+  file { "/opt/${title}/fscripts":
     ensure => directory,
   }
-  file { "/opt/${env}/lib":
+  file { "/opt/${title}/lib":
     ensure => directory,
   }
-  file { "/opt/${env}/fscripts/txservice.sh":
+  file { "/opt/${title}/fscripts/txservice.sh":
     ensure  => file,
     content => epp('txservice/foreverscript', {
-      env => $env
+      env => $title
     })
   }
 }
