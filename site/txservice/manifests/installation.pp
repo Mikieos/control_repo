@@ -32,6 +32,11 @@ define txservice::installation (
   file { "/var/log/forever/${title}/forever.log": 
     ensure  => file,
   }
+  $config = loadyaml("txservice/default.yaml")
+  file { "/opt/${title}/configurations/config.json":
+    ensure => file,
+    source => template('txservice/tx-service.config.json', $config);
+  }
   exec {"install txservice ${title}":
     command => "/opt/${title}/fscripts/txservice.sh update ${version}",
     require => [File["/opt/${title}/fscripts/txservice.sh"]],
