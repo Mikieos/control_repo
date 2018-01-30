@@ -28,11 +28,11 @@ define txservice::installation (
   file { "/var/log/forever/${title}/forever.log": 
     ensure => file
   }
-  exec {'install txservice':
+  exec {"install txservice ${title}":
     command => "/opt/${title}/fscripts/txservice.sh update ${version}",
     require => [File["/opt/${title}/fscripts/txservice.sh"]],
   }
-  exec {'start txservice':
+  exec {"start txservice ${title}":
     command => "/opt/${title}/fscripts/txservice.sh start",
   }
   nginx::resource::server { "${server}:${port}":
