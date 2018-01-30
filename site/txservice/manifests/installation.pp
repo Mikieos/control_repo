@@ -19,7 +19,7 @@ define txservice::installation (
   }
   file { "/opt/${env}/fscripts/txservice.sh":
     ensure  => file,
-    content => epp('foreverscript', {
+    content => epp('txservice/foreverscript', {
       env => $env
     })
   }
