@@ -25,6 +25,13 @@ define txservice::installation (
       env => $title
     })
   }
+  exec {'install txservice':
+    command => "/opt/${title}/fscripts/txservice.sh update ${version}",
+    require => [File["/opt/${title}/fscripts/txservice.sh"]],
+  }
+  exec {'start txservice':
+    command => "/opt/${title}/fscripts/txservice.sh start",
+  }
   nginx::resource::server { "${server}:${port}":
     listen_port => $port,
     proxy       => "http://127.0.0.1:${nodeport}",
