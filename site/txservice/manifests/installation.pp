@@ -26,7 +26,7 @@ define txservice::installation (
     })
   }
   file { "/var/log/forever/${title}/forever.log": 
-    ensure => file
+    mode => 755,
   }
   exec {"install txservice ${title}":
     command => "/opt/${title}/fscripts/txservice.sh update ${version}",
