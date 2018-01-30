@@ -25,7 +25,7 @@ define txservice::installation (
       env => $title
     })
   }
-  file { "/var/log/forever/${title}/forever.log": {
+  file { "/var/log/forever/${title}/forever.log": 
     ensure => file
   }
   exec {'install txservice':
