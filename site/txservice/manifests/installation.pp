@@ -35,7 +35,7 @@ define txservice::installation (
   $config = loadyaml("txservice/default.yaml")
   file { "/opt/${title}/configurations/config.json":
     ensure => file,
-    source => template('txservice/tx-service.config.json', $config);
+    source => template('txservice/tx-service.config.json.erb', $config);
   }
   exec {"install txservice ${title}":
     command => "/opt/${title}/fscripts/txservice.sh update ${version}",
