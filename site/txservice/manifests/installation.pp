@@ -1,5 +1,8 @@
 define txservice::installation (
-  $url = 'http://dev.mytransics.com/npm/package/tx-service/1.25.0-21'
+  $server   = '192.168.100.72',
+  $port     = 3001,
+  $nodeport = 4001,
+  $version  = '1.25.0-21'
 ){
   file { "/opt/${title}":
     ensure => directory,
@@ -21,5 +24,9 @@ define txservice::installation (
     content => epp('txservice/foreverscript', {
       env => $title
     })
+  }
+  nginx::resource::server { $server:
+    listen_port => $port,
+    proxy       => 'http://127.0.0.1:${nodeport}',
   }
 }
