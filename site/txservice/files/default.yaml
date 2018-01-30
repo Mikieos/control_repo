@@ -3,7 +3,7 @@
 #authentication to qa.mytransics.com
 #api keys, ports and secrets based on qa.mytransics.com
 
-#config :
+config :
   domain_name: "mytransics.com"
   cloud_host_name: "qa"
 
