@@ -1,8 +1,8 @@
 ---
-:backends: yaml
-:yaml:
-  :datadir: "./"
-:hierarchy:
-  - "%{::environment}/config"
-:logger: console
-:merge_behavior: deeper
+version: 5
+defaults:
+  datadir: ./
+  data_hash: yaml_data
+hierarchy:
+  - name: "TX-Service data"
+    path: "%{environment}/config.yaml"
