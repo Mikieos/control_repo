@@ -1,0 +1,8 @@
+---
+:backends: yaml
+:yaml:
+  :datadir: "./"
+:hierarchy:
+  - "%{::environment}/config"
+:logger: console
+:merge_behavior: deeper
