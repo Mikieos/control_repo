@@ -4,7 +4,6 @@ define txservice::installation (
   $nodeport = 4001,
   $version  = '1.25.0-21'
 ){
-  $config = hiera_hash('config')
   file { "/opt/${title}":
     ensure => directory,
   }
