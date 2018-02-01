@@ -2,7 +2,8 @@ define txservice::installation (
   $server   = '192.168.100.72',
   $port     = 3001,
   $nodeport = 4001,
-  $version  = '1.25.0-21'
+  $version  = '1.25.0-21',
+  $config   = lookup('config')
 ){
   file { "/opt/${title}":
     ensure => directory,
