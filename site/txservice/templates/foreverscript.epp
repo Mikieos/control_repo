@@ -23,6 +23,13 @@ case "$1" in
         ln -s /opt/<%= $env %>/configurations/config.json /opt/<%= $env %>/lib/node_modules/tx-service/config.json
         /opt/<%= $env %>/fscripts/txservice.sh restart
         ;;
+  install)
+        cd /opt/<%= $env %>
+        npm install --prefix /opt/<%= $env %> http://dev.mytransics.com/npm/package/tx-service/"$2" -g
+        rm -f /opt/<%= $env %>/lib/node_modules/tx-service/config.json
+        ln -s /opt/<%= $env %>/configurations/config.json /opt/<%= $env %>/lib/node_modules/tx-service/config.json
+        /opt/<%= $env %>/fscripts/txservice.sh start
+        ;;
   *)
         echo "Usage: $0 start|stop|restart|tail|logs|update"
         exit 3
