@@ -6,6 +6,9 @@ config :
     servers:
       -
         url: mongo
+        
+    redis:
+      blank: blank
 
     mytransics:
       authenticationEndpoint: "http://localhost:10081"
