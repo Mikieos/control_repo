@@ -35,9 +35,9 @@ define txservice::installation (
   }
   file { "/opt/${title}/configurations/config.json":
     ensure => file,
-    source => template('txservice/tx-service.config.json.erb', 
+    source => template('txservice/tx-service.config.json.erb', {
       config => $config
-    );
+    });
   }
   exec {"install txservice ${title}":
     command => "/opt/${title}/fscripts/txservice.sh update ${version}",
