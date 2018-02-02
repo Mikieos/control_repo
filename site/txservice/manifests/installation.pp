@@ -3,8 +3,12 @@ define txservice::installation (
   $port     = 3001,
   $nodeport = 4001,
   $version  = '1.25.0-21',
-  $config   = lookup('config')
+  $config   = lookup('config', {merge => hash, default_value => []})
 ){
+  info("installation started")
+  info("Config contents ${config}.")
+  info("my transics domain: ${config["mytransics"]["domain"]}");
+  info("my transics domain: ${config["redis"]["endpoints"]}");
   file { "/opt/${title}":
     ensure => directory,
   }
@@ -27,25 +31,24 @@ define txservice::installation (
       env => $title
     })
   }
-  file { "/var/log/forever/${title}": 
+  file { "/var/log/forever/${title}":
     ensure => directory,
   }
-  file { "/var/log/forever/${title}/forever.log": 
+  file { "/var/log/forever/${title}/forever.log":
     ensure  => file,
   }
   file { "/opt/${title}/configurations/config.json":
     ensure => file,
-    source => epp('txservice/tx-service.config.json', { config => $config});
+    # source => template('txservice/tx-service.config.json.erb', { config => $config});
   }
+  info("installing TX-Service")
   exec {"install txservice ${title}":
-    command => "/opt/${title}/fscripts/txservice.sh update ${version}",
+    command => "/opt/${title}/fscripts/txservice.sh install ${version}",
     require => [File["/opt/${title}/fscripts/txservice.sh"]],
   }
-  exec {"start txservice ${title}":
-    command => "/opt/${title}/fscripts/txservice.sh start",
-  }
+  info("TX-Serivce Installed")
   nginx::resource::server { "${server}:${port}":
     listen_port => $port,
-    proxy       => "http://127.0.0.1:${nodeport}",
+    proxy	=> "http://127.0.0.1:${nodeport}",
   }
 }
